@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Live & Podcast - Styn</title>
+
+  <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Pacifico&display=swap" rel="stylesheet">
+</head>
+
+<body id="top">
+
+  <header class="header" data-header>
+    <div class="overlay" data-overlay></div>
+    
+    <!-- TOP HEADER BAR -->
+    <div class="header-top">
+      <div class="container">
+        <!-- SITE NAME (LEFT) -->
+        <a href="./index.html" class="header-logo">
+          <span class="logo-text">Styn</span>
+        </a>
+        
+        <!-- SEARCH BAR (CENTER) -->
+        <div class="header-search-wrapper">
+          <form class="header-search-form" id="headerSearchForm">
+            <input type="text" class="header-search-input" placeholder="Search for videos" id="headerSearchInput">
+            <button type="submit" class="header-search-btn">
+              <ion-icon name="search"></ion-icon>
+            </button>
+          </form>
+        </div>
+
+        <!-- HEADER ACTIONS (RIGHT) -->
+        <div class="header-actions">
+          <button class="header-action-btn create-btn" id="createBtn" onclick="document.getElementById('uploadModal')?.style.display='flex';">
+            <ion-icon name="videocam-outline"></ion-icon>
+            <span>Create</span>
+          </button>
+          
+          <div class="header-action-btn account-btn" id="accountBtn">
+            <span>My Account</span>
+            <ion-icon name="person-outline"></ion-icon>
+          </div>
+          
+          <button class="header-action-btn menu-btn" data-menu-open-btn>
+            <ion-icon name="ellipsis-vertical"></ion-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- CATEGORY NAVIGATION BAR -->
+    <div class="category-nav-bar">
+      <div class="category-nav-container">
+        <div class="category-nav-scroll" id="categoryNavScroll">
+          <a href="./index.html" class="category-btn" data-category="reels">Reels</a>
+          <a href="./blockbuster.html" class="category-btn" data-category="blockbuster">Blockbuster</a>
+          <a href="./chat.html" class="category-btn" id="chatCategoryBtn" data-category="chat">Chat</a>
+          <a href="./dating.html" class="category-btn" data-category="dating">Dating</a>
+          <a href="./live.html" class="category-btn active" data-category="live">Live</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- MOBILE MENU -->
+    <nav class="navbar" data-navbar>
+      <div class="navbar-top">
+        <a href="./index.html" class="logo">
+          <span class="logo-text">Styn</span>
+        </a>
+        <button class="menu-close-btn" data-menu-close-btn>
+          <ion-icon name="close-outline"></ion-icon>
+        </button>
+      </div>
+    </nav>
+
+    <!-- ACCOUNT DROPDOWN -->
+    <div class="account-dropdown" id="accountDropdown" style="display: none;">
+      <div class="dropdown-content">
+        <div class="dropdown-user-profile" id="userProfile" style="display: none;">
+          <div class="profile-initials" id="profileInitials"></div>
+          <div class="profile-info">
+            <span class="profile-username" id="profileUsername"></span>
+            <span class="profile-email" id="profileEmail"></span>
+          </div>
+        </div>
+        <div class="dropdown-divider" id="dropdownDivider" style="display: none;"></div>
+        <a href="#" class="dropdown-item" id="myProfileItem" style="display: none;">
+          <ion-icon name="person-outline"></ion-icon>
+          <span>My Profile</span>
+        </a>
+        <a href="#" class="dropdown-item" id="settingsItem" style="display: none;">
+          <ion-icon name="settings-outline"></ion-icon>
+          <span>Settings</span>
+        </a>
+        <a href="#" class="dropdown-item" id="signOutBtn" style="display: none;">
+          <ion-icon name="log-out-outline"></ion-icon>
+          <span>Sign Out</span>
+        </a>
+        <a href="./login.html" class="dropdown-item" id="signInDropdownBtn">
+          <ion-icon name="log-in-outline"></ion-icon>
+          <span>Sign In</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <article>
+      <!-- LIVE HERO -->
+      <section class="live-hero">
+        <div class="container">
+          <div class="hero-content">
+            <p class="hero-subtitle">Live Broadcasting</p>
+            <h1 class="h1 hero-title">Go <strong>Live</strong> or Start a Podcast</h1>
+            <p class="hero-description">
+              Broadcast your events, shows, or discussions in real-time. All streams are automatically saved for later viewing.
+            </p>
+            <button class="btn btn-primary" id="goLiveBtn" onclick="window.location.href='./live-broadcast.html'" style="display: none;">
+              <ion-icon name="radio-button-on"></ion-icon>
+              <span>Go Live</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- AD BANNER -->
+      <section class="ad-banner" id="adBanner1">
+        <div class="container">
+          <div class="ad-placeholder">
+            <span class="ad-label">Advertisement</span>
+            <p>Ad space for banner ads</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- LIVE STREAMS -->
+      <section class="live-streams">
+        <div class="container">
+          <div class="section-header">
+            <p class="section-subtitle">Live Now</p>
+            <h2 class="h2 section-title">Currently Streaming</h2>
+          </div>
+          <ul class="streams-list" id="liveStreamsList">
+            <li>
+              <div class="stream-card live-now">
+                <a href="#" class="stream-link">
+                  <figure class="card-banner">
+                    <img src="./assets/images/movie-4.png" alt="Live Stream">
+                    <div class="live-indicator">
+                      <span class="live-dot"></span>
+                      <span>LIVE</span>
+                    </div>
+                    <div class="viewer-count">
+                      <ion-icon name="people"></ion-icon>
+                      <span>1.2K watching</span>
+                    </div>
+                  </figure>
+                </a>
+                <div class="card-content">
+                  <h3 class="card-title">Live Stream Title</h3>
+                  <div class="stream-author">
+                    <img src="./assets/images/default-avatar.png" alt="Streamer" class="streamer-avatar">
+                    <span>@streamer_name</span>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <!-- More live streams -->
+          </ul>
+        </div>
+      </section>
+
+      <!-- LIVE REPLAYS -->
+      <section class="live-replays">
+        <div class="container">
+          <div class="section-header">
+            <p class="section-subtitle">Live Library</p>
+            <h2 class="h2 section-title">Past Live Streams</h2>
+            <p class="section-description">Catch up on previous broadcasts</p>
+          </div>
+          <ul class="streams-list" id="replayStreamsList">
+            <li>
+              <div class="stream-card">
+                <a href="#" class="stream-link">
+                  <figure class="card-banner">
+                    <img src="./assets/images/movie-5.png" alt="Live Replay">
+                    <div class="play-overlay">
+                      <ion-icon name="play-circle"></ion-icon>
+                    </div>
+                    <div class="replay-badge">REPLAY</div>
+                  </figure>
+                </a>
+                <div class="card-content">
+                  <h3 class="card-title">Past Live Stream</h3>
+                  <div class="card-meta">
+                    <span class="stream-date">Streamed 2 hours ago</span>
+                    <span class="views">12K views</span>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <!-- More replay streams -->
+          </ul>
+        </div>
+      </section>
+
+      <!-- PODCASTS -->
+      <section class="podcasts">
+        <div class="container">
+          <div class="section-header">
+            <p class="section-subtitle">Podcasts</p>
+            <h2 class="h2 section-title">Audio Podcasts</h2>
+          </div>
+          <ul class="podcasts-list" id="podcastsList">
+            <li>
+              <div class="podcast-card">
+                <a href="#" class="podcast-link">
+                  <figure class="card-banner">
+                    <img src="./assets/images/movie-6.png" alt="Podcast">
+                    <div class="play-overlay">
+                      <ion-icon name="play-circle"></ion-icon>
+                    </div>
+                  </figure>
+                </a>
+                <div class="card-content">
+                  <h3 class="card-title">Podcast Episode Title</h3>
+                  <p class="podcast-description">Episode description...</p>
+                  <div class="card-meta">
+                    <span class="podcast-date">Published 1 day ago</span>
+                    <span class="duration">45 min</span>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <!-- More podcast cards -->
+          </ul>
+        </div>
+      </section>
+    </article>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-top">
+      <div class="container">
+        <div class="footer-brand-wrapper">
+          <a href="./index.html" class="logo">
+            <span class="logo-text">Styn</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p class="copyright">&copy; 2024 <a href="#">Styn</a>. All Rights Reserved</p>
+      </div>
+    </div>
+  </footer>
+
+  <a href="#top" class="go-top" data-go-top>
+    <ion-icon name="chevron-up"></ion-icon>
+  </a>
+
+  <script src="./assets/js/script.js"></script>
+  <script src="./assets/js/auth.js"></script>
+  <script src="./assets/js/live.js"></script>
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</body>
+
+</html>
+

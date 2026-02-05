@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In - Styn</title>
+
+  <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Pacifico&display=swap" rel="stylesheet">
+</head>
+
+<body id="top">
+
+  <header class="header" data-header>
+    <div class="overlay" data-overlay></div>
+    
+    <!-- TOP HEADER BAR -->
+    <div class="header-top">
+      <div class="container">
+        <!-- SITE NAME (LEFT) -->
+        <a href="./index.html" class="header-logo">
+          <span class="logo-text">Styn</span>
+        </a>
+        
+        <!-- SEARCH BAR (CENTER) -->
+        <div class="header-search-wrapper">
+          <form class="header-search-form" id="headerSearchForm">
+            <input type="text" class="header-search-input" placeholder="Search for videos" id="headerSearchInput">
+            <button type="submit" class="header-search-btn">
+              <ion-icon name="search"></ion-icon>
+            </button>
+          </form>
+        </div>
+
+        <!-- HEADER ACTIONS (RIGHT) -->
+        <div class="header-actions">
+          <button class="header-action-btn create-btn" id="createBtn" style="display: none;">
+            <ion-icon name="videocam-outline"></ion-icon>
+            <span>Create</span>
+          </button>
+          
+          <div class="header-action-btn account-btn" id="accountBtn">
+            <span>My Account</span>
+            <ion-icon name="person-outline"></ion-icon>
+          </div>
+          
+          <button class="header-action-btn menu-btn" data-menu-open-btn>
+            <ion-icon name="ellipsis-vertical"></ion-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- CATEGORY NAVIGATION BAR -->
+    <div class="category-nav-bar">
+      <div class="category-nav-container">
+        <div class="category-nav-scroll" id="categoryNavScroll">
+          <a href="./index.html" class="category-btn" data-category="reels">Reels</a>
+          <a href="./blockbuster.html" class="category-btn" data-category="blockbuster">Blockbuster</a>
+          <a href="./chat.html" class="category-btn" id="chatCategoryBtn" data-category="chat">Chat</a>
+          <a href="./dating.html" class="category-btn" data-category="dating">Dating</a>
+          <a href="./live.html" class="category-btn" data-category="live">Live</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- MOBILE MENU -->
+    <nav class="navbar" data-navbar>
+      <div class="navbar-top">
+        <a href="./index.html" class="logo">
+          <span class="logo-text">Styn</span>
+        </a>
+        <button class="menu-close-btn" data-menu-close-btn>
+          <ion-icon name="close-outline"></ion-icon>
+        </button>
+      </div>
+    </nav>
+
+    <!-- ACCOUNT DROPDOWN -->
+    <div class="account-dropdown" id="accountDropdown" style="display: none;">
+      <div class="dropdown-content">
+        <div class="dropdown-user-profile" id="userProfile" style="display: none;">
+          <div class="profile-initials" id="profileInitials"></div>
+          <div class="profile-info">
+            <span class="profile-username" id="profileUsername"></span>
+            <span class="profile-email" id="profileEmail"></span>
+          </div>
+        </div>
+        <div class="dropdown-divider" id="dropdownDivider" style="display: none;"></div>
+        <a href="#" class="dropdown-item" id="myProfileItem" style="display: none;">
+          <ion-icon name="person-outline"></ion-icon>
+          <span>My Profile</span>
+        </a>
+        <a href="#" class="dropdown-item" id="settingsItem" style="display: none;">
+          <ion-icon name="settings-outline"></ion-icon>
+          <span>Settings</span>
+        </a>
+        <a href="#" class="dropdown-item" id="signOutBtn" style="display: none;">
+          <ion-icon name="log-out-outline"></ion-icon>
+          <span>Sign Out</span>
+        </a>
+        <a href="./login.html" class="dropdown-item" id="signInDropdownBtn">
+          <ion-icon name="log-in-outline"></ion-icon>
+          <span>Sign In</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <div class="auth-container">
+    <div class="auth-card">
+      <a href="./index.html" class="auth-logo">
+        <span class="logo-text">Styn</span>
+      </a>
+      
+      <div class="auth-tabs">
+        <button class="auth-tab active" data-tab="login">Sign In</button>
+        <button class="auth-tab" data-tab="signup" onclick="window.location.href='./signup.html'">Sign Up</button>
+      </div>
+
+      <form class="auth-form" id="loginForm">
+        <div class="form-group">
+          <label>Email or Phone Number</label>
+          <input type="text" placeholder="Enter email or phone" required id="loginIdentifier">
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" placeholder="Enter password" required id="loginPassword">
+        </div>
+        <div class="form-options">
+          <label class="checkbox-label">
+            <input type="checkbox">
+            <span>Remember me</span>
+          </label>
+          <a href="#" class="forgot-password">Forgot password?</a>
+        </div>
+        <button type="submit" class="btn btn-primary btn-auth">
+          <span>Sign In</span>
+        </button>
+      </form>
+
+      <div class="auth-divider">
+        <span>OR</span>
+      </div>
+
+      <div class="auth-social">
+        <button class="btn btn-social">
+          <ion-icon name="logo-google"></ion-icon>
+          <span>Continue with Google</span>
+        </button>
+        <button class="btn btn-social">
+          <ion-icon name="logo-facebook"></ion-icon>
+          <span>Continue with Facebook</span>
+        </button>
+      </div>
+
+      <p class="auth-footer">
+        Don't have an account? <a href="./signup.html">Sign up for FREE</a>
+      </p>
+    </div>
+  </div>
+
+  <script src="./assets/js/script.js"></script>
+  <script src="./assets/js/auth.js"></script>
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</body>
+
+</html>
+

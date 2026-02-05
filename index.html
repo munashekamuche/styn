@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Styn - Watch, Create, Connect</title>
+
+  <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Pacifico&display=swap" rel="stylesheet">
+</head>
+
+<body id="top" class="reel-page">
+
+  <header class="header reel-header" data-header>
+    <div class="overlay" data-overlay></div>
+    
+    <!-- TOP HEADER BAR -->
+    <div class="header-top">
+      <div class="container">
+        <!-- SITE NAME (LEFT) -->
+        <a href="./index.html" class="header-logo">
+          <span class="logo-text">Styn</span>
+        </a>
+        
+        <!-- SEARCH BAR (CENTER) -->
+        <div class="header-search-wrapper">
+          <form class="header-search-form" id="headerSearchForm">
+            <input type="text" class="header-search-input" placeholder="Search for videos" id="headerSearchInput">
+            <button type="submit" class="header-search-btn">
+              <ion-icon name="search"></ion-icon>
+            </button>
+          </form>
+        </div>
+
+        <!-- HEADER ACTIONS (RIGHT) -->
+        <div class="header-actions">
+          <button class="header-action-btn create-btn" id="createBtn" onclick="document.getElementById('uploadModal').style.display='flex';">
+            <ion-icon name="videocam-outline"></ion-icon>
+            <span>Create</span>
+          </button>
+          
+          <div class="header-action-btn account-btn" id="accountBtn">
+            <span>My Account</span>
+            <ion-icon name="person-outline"></ion-icon>
+          </div>
+          
+          <button class="header-action-btn menu-btn" data-menu-open-btn>
+            <ion-icon name="ellipsis-vertical"></ion-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- CATEGORY NAVIGATION BAR -->
+    <div class="category-nav-bar">
+      <div class="category-nav-container">
+        <div class="category-nav-scroll" id="categoryNavScroll">
+          <a href="./index.html" class="category-btn active" data-category="reels">Reels</a>
+          <a href="./blockbuster.html" class="category-btn" data-category="blockbuster">Blockbuster</a>
+          <a href="./chat.html" class="category-btn" id="chatCategoryBtn" data-category="chat">Chat</a>
+          <a href="./dating.html" class="category-btn" data-category="dating">Dating</a>
+          <a href="./live.html" class="category-btn" data-category="live">Live</a>
+          
+        </div>
+      </div>
+    </div>
+
+    <!-- MOBILE MENU -->
+    <nav class="navbar" data-navbar>
+      <div class="navbar-top">
+        <a href="./index.html" class="logo">
+          <span class="logo-text">Styn</span>
+        </a>
+        <button class="menu-close-btn" data-menu-close-btn>
+          <ion-icon name="close-outline"></ion-icon>
+        </button>
+      </div>
+    </nav>
+
+    <!-- ACCOUNT DROPDOWN -->
+    <div class="account-dropdown" id="accountDropdown" style="display: none;">
+      <div class="dropdown-content">
+        <div class="dropdown-user-profile" id="userProfile" style="display: none;">
+          <div class="profile-initials" id="profileInitials"></div>
+          <div class="profile-info">
+            <span class="profile-username" id="profileUsername"></span>
+            <span class="profile-email" id="profileEmail"></span>
+          </div>
+        </div>
+        <div class="dropdown-divider" id="dropdownDivider" style="display: none;"></div>
+        <a href="#" class="dropdown-item" id="myProfileItem" style="display: none;">
+          <ion-icon name="person-outline"></ion-icon>
+          <span>My Profile</span>
+        </a>
+        <a href="#" class="dropdown-item" id="settingsItem" style="display: none;">
+          <ion-icon name="settings-outline"></ion-icon>
+          <span>Settings</span>
+        </a>
+        <a href="#" class="dropdown-item" id="signOutBtn" style="display: none;">
+          <ion-icon name="log-out-outline"></ion-icon>
+          <span>Sign Out</span>
+        </a>
+        <a href="./login.html" class="dropdown-item" id="signInDropdownBtn">
+          <ion-icon name="log-in-outline"></ion-icon>
+          <span>Sign In</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="reel-main">
+    <!-- MY REEL CONTAINER - Enhanced TikTok Style -->
+    <section class="reel-feed" id="reelFeed">
+      
+      <!-- Reel Video 1 -->
+      <div class="reel-item" data-reel-id="1">
+        <div class="reel-video-container">
+          <video class="reel-video-player" playsinline muted loop preload="metadata">
+            <source src="./assets/my_reels/WhatsApp Video 2026-02-02 at 7.47.30 PM.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <div class="reel-play-pause" onclick="togglePlayPause(this)">
+            <ion-icon name="play-circle" class="play-icon"></ion-icon>
+          </div>
+          <div class="reel-gradient-overlay"></div>
+        </div>
+        
+        <div class="reel-content">
+          <div class="reel-sidebar">
+            <div class="reel-user-avatar">
+              <div class="avatar-placeholder">
+                <ion-icon name="person"></ion-icon>
+              </div>
+              <div class="follow-btn" onclick="followUser(this)">
+                <ion-icon name="add"></ion-icon>
+              </div>
+            </div>
+            
+            <div class="reel-interactions">
+              <button class="reel-interaction-btn" data-action="like" onclick="handleLike(this)">
+                <ion-icon name="heart-outline" class="icon-outline"></ion-icon>
+                <ion-icon name="heart" class="icon-filled" style="display: none;"></ion-icon>
+                <span class="interaction-count">12.5K</span>
+              </button>
+              
+              <button class="reel-interaction-btn" data-action="comment" onclick="openComments(1)">
+                <ion-icon name="chatbubble-outline"></ion-icon>
+                <span class="interaction-count">1.2K</span>
+              </button>
+              
+              <button class="reel-interaction-btn" data-action="share" onclick="shareReel(1)">
+                <ion-icon name="arrow-redo-outline"></ion-icon>
+                <span class="interaction-count">890</span>
+              </button>
+              
+              <button class="reel-interaction-btn" data-action="bookmark" onclick="bookmarkReel(this)">
+                <ion-icon name="bookmark-outline" class="icon-outline"></ion-icon>
+                <ion-icon name="bookmark" class="icon-filled" style="display: none;"></ion-icon>
+              </button>
+            </div>
+          </div>
+          
+          <div class="reel-info-panel">
+            <div class="reel-author-info">
+              <h3 class="reel-author-name">@creative_user</h3>
+              <p class="reel-caption">Amazing sunset vibes 🌅✨ #nature #sunset #vibes</p>
+              <div class="reel-music">
+                <ion-icon name="musical-notes"></ion-icon>
+                <span>Original Sound - creative_user</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reel Video 2 -->
+      <div class="reel-item" data-reel-id="2">
+        <div class="reel-video-container">
+          <video class="reel-video-player" playsinline muted loop preload="metadata">
+            <source src="./assets/my_reels/WhatsApp Video 2026-02-02 at 7.47.31 PM.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <div class="reel-play-pause" onclick="togglePlayPause(this)">
+            <ion-icon name="play-circle" class="play-icon"></ion-icon>
+          </div>
+          <div class="reel-gradient-overlay"></div>
+        </div>
+        
+        <div class="reel-content">
+          <div class="reel-sidebar">
+            <div class="reel-user-avatar">
+              <div class="avatar-placeholder">
+                <ion-icon name="person"></ion-icon>
+              </div>
+              <div class="follow-btn" onclick="followUser(this)">
+                <ion-icon name="add"></ion-icon>
+              </div>
+            </div>
+            
+            <div class="reel-interactions">
+              <button class="reel-interaction-btn" data-action="like" onclick="handleLike(this)">
+                <ion-icon name="heart-outline" class="icon-outline"></ion-icon>
+                <ion-icon name="heart" class="icon-filled" style="display: none;"></ion-icon>
+                <span class="interaction-count">8.9K</span>
+              </button>
+              
+              <button class="reel-interaction-btn" data-action="comment" onclick="openComments(2)">
+                <ion-icon name="chatbubble-outline"></ion-icon>
+                <span class="interaction-count">456</span>
+              </button>
+              
+              <button class="reel-interaction-btn" data-action="share" onclick="shareReel(2)">
+                <ion-icon name="arrow-redo-outline"></ion-icon>
+                <span class="interaction-count">234</span>
+              </button>
+              
+              <button class="reel-interaction-btn" data-action="bookmark" onclick="bookmarkReel(this)">
+                <ion-icon name="bookmark-outline" class="icon-outline"></ion-icon>
+                <ion-icon name="bookmark" class="icon-filled" style="display: none;"></ion-icon>
+              </button>
+            </div>
+          </div>
+          
+          <div class="reel-info-panel">
+            <div class="reel-author-info">
+              <h3 class="reel-author-name">@trending_creator</h3>
+              <p class="reel-caption">Life is beautiful when you capture the moment 📸 #photography #life</p>
+              <div class="reel-music">
+                <ion-icon name="musical-notes"></ion-icon>
+                <span>Original Sound - trending_creator</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reel Video 3 -->
+      <div class="reel-item" data-reel-id="3">
+        <div class="reel-video-container">
+          <video class="reel-video-player" playsinline muted loop preload="metadata">
+            <source src="./assets/my_reels/WhatsApp Video 2026-02-02 at 7.47.36 PM.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <div class="reel-play-pause" onclick="togglePlayPause(this)">
+            <ion-icon name="play-circle" class="play-icon"></ion-icon>
+          </div>
+          <div class="reel-gradient-overlay"></div>
+        </div>
+        
+        <div class="reel-content">
+          <div class="reel-sidebar">
+            <div class="reel-user-avatar">
+              <div class="avatar-placeholder">
+                <ion-icon name="person"></ion-icon>
+              </div>
+              <div class="follow-btn" onclick="followUser(this)">
+                <ion-icon name="add"></ion-icon>
+              </div>
+            </div>
+            
+            <div class="reel-interactions">
+              <button class="reel-interaction-btn" data-action="like" onclick="handleLike(this)">
+                <ion-icon name="heart-outline" class="icon-outline"></ion-icon>
+                <ion-icon name="heart" class="icon-filled" style="display: none;"></ion-icon>
+                <span class="interaction-count">15.3K</span>
+              </button>
+              
+              <button class="reel-interaction-btn" data-action="comment" onclick="openComments(3)">
+                <ion-icon name="chatbubble-outline"></ion-icon>
+                <span class="interaction-count">2.1K</span>
+              </button>
+              
+              <button class="reel-interaction-btn" data-action="share" onclick="shareReel(3)">
+                <ion-icon name="arrow-redo-outline"></ion-icon>
+                <span class="interaction-count">1.5K</span>
+              </button>
+              
+              <button class="reel-interaction-btn" data-action="bookmark" onclick="bookmarkReel(this)">
+                <ion-icon name="bookmark-outline" class="icon-outline"></ion-icon>
+                <ion-icon name="bookmark" class="icon-filled" style="display: none;"></ion-icon>
+              </button>
+            </div>
+          </div>
+          
+          <div class="reel-info-panel">
+            <div class="reel-author-info">
+              <h3 class="reel-author-name">@viral_content</h3>
+              <p class="reel-caption">This is what happens when creativity meets passion 🎨 #art #creative</p>
+              <div class="reel-music">
+                <ion-icon name="musical-notes"></ion-icon>
+                <span>Original Sound - viral_content</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reel Video 4 -->
+      <div class="reel-item" data-reel-id="4">
+        <div class="reel-video-container">
+          <video class="reel-video-player" playsinline muted loop preload="metadata">
+            <source src="./assets/my_reels/WhatsApp Video 2026-02-02 at 7.47.39 PM.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <div class="reel-play-pause" onclick="togglePlayPause(this)">
+            <ion-icon name="play-circle" class="play-icon"></ion-icon>
+          </div>
+          <div class="reel-gradient-overlay"></div>
+        </div>
+        
+        <div class="reel-content">
+          <div class="reel-sidebar">
+            <div class="reel-user-avatar">
+              <div class="avatar-placeholder">
+                <ion-icon name="person"></ion-icon>
+              </div>
+              <div class="follow-btn" onclick="followUser(this)">
+                <ion-icon name="add"></ion-icon>
+              </div>
+            </div>
+            
+            <div class="reel-interactions">
+              <button class="reel-interaction-btn" data-action="like" onclick="handleLike(this)">
+                <ion-icon name="heart-outline" class="icon-outline"></ion-icon>
+                <ion-icon name="heart" class="icon-filled" style="display: none;"></ion-icon>
+                <span class="interaction-count">22.7K</span>
+              </button>
+              
+              <button class="reel-interaction-btn" data-action="comment" onclick="openComments(4)">
+                <ion-icon name="chatbubble-outline"></ion-icon>
+                <span class="interaction-count">3.4K</span>
+              </button>
+              
+              <button class="reel-interaction-btn" data-action="share" onclick="shareReel(4)">
+                <ion-icon name="arrow-redo-outline"></ion-icon>
+                <span class="interaction-count">2.1K</span>
+              </button>
+              
+              <button class="reel-interaction-btn" data-action="bookmark" onclick="bookmarkReel(this)">
+                <ion-icon name="bookmark-outline" class="icon-outline"></ion-icon>
+                <ion-icon name="bookmark" class="icon-filled" style="display: none;"></ion-icon>
+              </button>
+            </div>
+          </div>
+          
+          <div class="reel-info-panel">
+            <div class="reel-author-info">
+              <h3 class="reel-author-name">@epic_moments</h3>
+              <p class="reel-caption">Epic moments captured in time ⚡ #epic #moments #viral</p>
+              <div class="reel-music">
+                <ion-icon name="musical-notes"></ion-icon>
+                <span>Original Sound - epic_moments</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- UPLOAD BUTTON (Only for logged in users) -->
+    <button class="reel-upload-fab" id="reelUploadBtn" style="display: none;" onclick="document.getElementById('uploadModal').style.display='flex';">
+      <ion-icon name="add"></ion-icon>
+    </button>
+
+    <!-- UPLOAD MODAL -->
+    <div class="upload-modal" id="uploadModal" style="display: none;">
+      <div class="modal-overlay" onclick="document.getElementById('uploadModal').style.display='none';"></div>
+      <div class="modal-content upload-content">
+        <button class="modal-close-btn" onclick="document.getElementById('uploadModal').style.display='none';">
+          <ion-icon name="close-outline"></ion-icon>
+        </button>
+        <h2 class="modal-title">Upload Your Reel</h2>
+        <form class="upload-form" id="uploadForm">
+          <div class="upload-area" id="uploadArea">
+            <ion-icon name="cloud-upload-outline"></ion-icon>
+            <p>Drag & drop your video here</p>
+            <p class="upload-hint">Maximum 10 minutes • MP4, MOV, AVI</p>
+            <input type="file" accept="video/*" id="videoFile" style="display: none;">
+            <button type="button" class="btn btn-secondary" onclick="document.getElementById('videoFile').click();">
+              Choose File
+            </button>
+          </div>
+          <div class="form-group">
+            <label>Title</label>
+            <input type="text" placeholder="Enter video title" required>
+          </div>
+          <div class="form-group">
+            <label>Description</label>
+            <textarea placeholder="Describe your video..." rows="4"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Thumbnail</label>
+            <input type="file" accept="image/*" id="thumbnailFile">
+          </div>
+          <button type="submit" class="btn btn-primary">
+            <ion-icon name="cloud-upload"></ion-icon>
+            <span>Upload Reel</span>
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- COMMENT MODAL -->
+    <div class="comment-modal" id="commentModal" style="display: none;">
+      <div class="modal-overlay" onclick="document.getElementById('commentModal').style.display='none';"></div>
+      <div class="modal-content comment-content">
+        <button class="modal-close-btn" onclick="document.getElementById('commentModal').style.display='none';">
+          <ion-icon name="close-outline"></ion-icon>
+        </button>
+        <h2 class="modal-title">Comments</h2>
+        <div class="comments-list" id="commentsList">
+          <!-- Comments will be loaded here -->
+        </div>
+        <form class="comment-form" id="commentForm">
+          <input type="text" placeholder="Add a comment..." required>
+          <button type="submit">
+            <ion-icon name="send"></ion-icon>
+          </button>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-top">
+      <div class="container">
+        <div class="footer-brand-wrapper">
+          <a href="./index.html" class="logo">
+            <span class="logo-text">Styn</span>
+          </a>
+          <ul class="footer-list">
+            <li><a href="./index.html" class="footer-link">Home</a></li>
+            <li><a href="./blockbuster.html" class="footer-link">Blockbuster</a></li>
+            <li><a href="./live.html" class="footer-link">Live & Podcast</a></li>
+          </ul>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="quicklink-wrapper">
+          <ul class="quicklink-list">
+            <li><a href="#" class="quicklink-link">FAQ</a></li>
+            <li><a href="#" class="quicklink-link">Help Center</a></li>
+            <li><a href="#" class="quicklink-link">Terms of Use</a></li>
+            <li><a href="#" class="quicklink-link">Privacy</a></li>
+          </ul>
+          <ul class="social-list">
+            <li><a href="#" class="social-link"><ion-icon name="logo-facebook"></ion-icon></a></li>
+            <li><a href="#" class="social-link"><ion-icon name="logo-twitter"></ion-icon></a></li>
+            <li><a href="#" class="social-link"><ion-icon name="logo-instagram"></ion-icon></a></li>
+            <li><a href="#" class="social-link"><ion-icon name="logo-youtube"></ion-icon></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container">
+        <p class="copyright">
+          &copy; 2024 <a href="#">Styn</a>. All Rights Reserved
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="./assets/js/script.js"></script>
+  <script src="./assets/js/auth.js"></script>
+  <script src="./assets/js/reel-interactions.js"></script>
+  <script src="./assets/js/my-reel.js"></script>
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</body>
+
+</html>

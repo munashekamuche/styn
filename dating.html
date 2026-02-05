@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dating - Styn</title>
+
+  <!-- FAVICON -->
+  <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+
+  <!-- GOOGLE FONTS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Pacifico&display=swap" rel="stylesheet">
+
+  <!-- STYLESHEET -->
+  <link rel="stylesheet" href="./assets/css/style.css">
+
+  <!-- IONICONS -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</head>
+
+<body id="top">
+
+  <!-- HEADER -->
+  <header class="header" data-header>
+    <div class="overlay" data-overlay></div>
+    
+    <!-- TOP HEADER BAR -->
+    <div class="header-top">
+      <div class="container">
+        <!-- SITE NAME (LEFT) -->
+        <a href="./index.html" class="header-logo">
+          <span class="logo-text">Styn</span>
+        </a>
+        
+        <!-- SEARCH BAR (CENTER) -->
+        <div class="header-search-wrapper">
+          <form class="header-search-form" id="headerSearchForm">
+            <input type="text" class="header-search-input" placeholder="Search for people" id="headerSearchInput">
+            <button type="submit" class="header-search-btn">
+              <ion-icon name="search"></ion-icon>
+            </button>
+          </form>
+        </div>
+
+        <!-- HEADER ACTIONS (RIGHT) -->
+        <div class="header-actions">
+          <button class="header-action-btn create-btn" id="createBtn" onclick="openUploadModal()">
+            <ion-icon name="add-circle-outline"></ion-icon>
+            <span>Create Profile</span>
+          </button>
+          
+          <div class="header-action-btn account-btn" id="accountBtn">
+            <span>My Account</span>
+            <ion-icon name="person-outline"></ion-icon>
+          </div>
+          
+          <button class="header-action-btn menu-btn" data-menu-open-btn>
+            <ion-icon name="ellipsis-vertical"></ion-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- CATEGORY NAVIGATION BAR -->
+    <div class="category-nav-bar">
+      <div class="category-nav-container">
+        <div class="category-nav-scroll" id="categoryNavScroll">
+          <a href="./index.html" class="category-btn" data-category="reels">Reels</a>
+          <a href="./blockbuster.html" class="category-btn" data-category="blockbuster">Blockbuster</a>
+          <a href="./chat.html" class="category-btn" id="chatCategoryBtn" data-category="chat">Chat</a>
+          <a href="./dating.html" class="category-btn active" data-category="dating">Dating</a>
+          <a href="./live.html" class="category-btn" data-category="live">Live</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- MOBILE MENU -->
+    <nav class="navbar" data-navbar>
+      <div class="navbar-top">
+        <a href="./index.html" class="logo">
+          <span class="logo-text">Styn</span>
+        </a>
+        <button class="menu-close-btn" data-menu-close-btn>
+          <ion-icon name="close-outline"></ion-icon>
+        </button>
+      </div>
+    </nav>
+
+    <!-- ACCOUNT DROPDOWN -->
+    <div class="account-dropdown" id="accountDropdown" style="display: none;">
+      <div class="dropdown-content">
+        <div class="dropdown-user-profile" id="userProfile" style="display: none;">
+          <div class="profile-initials" id="profileInitials"></div>
+          <div class="profile-info">
+            <span class="profile-username" id="profileUsername"></span>
+            <span class="profile-email" id="profileEmail"></span>
+          </div>
+        </div>
+        <div class="dropdown-divider" id="dropdownDivider" style="display: none;"></div>
+        <a href="#" class="dropdown-item" id="myProfileItem" style="display: none;">
+          <ion-icon name="person-outline"></ion-icon>
+          <span>My Profile</span>
+        </a>
+        <a href="#" class="dropdown-item" id="settingsItem" style="display: none;">
+          <ion-icon name="settings-outline"></ion-icon>
+          <span>Settings</span>
+        </a>
+        <a href="#" class="dropdown-item" id="signOutBtn" style="display: none;">
+          <ion-icon name="log-out-outline"></ion-icon>
+          <span>Sign Out</span>
+        </a>
+        <a href="./login.html" class="dropdown-item" id="signInDropdownBtn">
+          <ion-icon name="log-in-outline"></ion-icon>
+          <span>Sign In</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main>
+    <article>
+
+      <!-- DATING HERO SECTION -->
+      <section class="dating-hero">
+        <div class="container">
+          <div class="dating-hero-content">
+            <h1 class="dating-title">Find Your <span class="highlight">Perfect Match</span></h1>
+            <p class="dating-subtitle">Connect with amazing people looking for love. Create your profile and start chatting today!</p>
+            
+            <!-- Unlock Chat Banner -->
+            <div class="unlock-chat-banner" id="unlockBanner">
+              <div class="unlock-content">
+                <ion-icon name="heart-circle" class="unlock-icon"></ion-icon>
+                <div class="unlock-text">
+                  <h3>Unlock Chat Feature</h3>
+                  <p>Pay just <span class="price">$3</span> to chat with all profiles for a whole year!</p>
+                </div>
+                <button class="unlock-btn" id="unlockChatBtn" onclick="openPaymentModal()">
+                  <ion-icon name="lock-open"></ion-icon>
+                  Unlock Now
+                </button>
+              </div>
+            </div>
+
+            <!-- Unlocked Status (Hidden by default) -->
+            <div class="chat-unlocked-banner" id="unlockedBanner" style="display: none;">
+              <ion-icon name="checkmark-circle"></ion-icon>
+              <span>Chat Unlocked! You can message anyone until <span id="expiryDate"></span></span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- DATING PROFILES GRID -->
+      <section class="dating-profiles-section">
+        <div class="container">
+          <div class="section-header">
+            <h2 class="section-title">People Looking for Love</h2>
+            <div class="filter-options">
+              <button class="filter-btn active" data-filter="all">All</button>
+              <button class="filter-btn" data-filter="online">Online</button>
+              <button class="filter-btn" data-filter="new">New</button>
+            </div>
+          </div>
+
+          <div class="dating-profiles-grid" id="profilesGrid">
+            <!-- Sample Profile Cards -->
+            <div class="dating-card">
+              <div class="dating-card-media">
+                <img src="./assets/images/dating/female1.webp" alt="Sarah Johnson">
+                <span class="online-badge">Online</span>
+              </div>
+              <div class="dating-card-content">
+                <h3 class="dating-name">Sarah Johnson</h3>
+                <span class="dating-age-location">24 • New York</span>
+                <p class="dating-bio">
+                  Looking for something real and meaningful.
+                  Love traveling and trying new cuisines.
+                  Dog mom to two adorable golden retrievers.
+                  Work in creative marketing by day.
+                  Let's grab coffee and see where it goes! ☕
+                </p>
+                <button class="chat-profile-btn" onclick="initiateChat('sarah')">
+                  <ion-icon name="chatbubble"></ion-icon>
+                  Chat
+                </button>
+              </div>
+            </div>
+
+            <div class="dating-card">
+              <div class="dating-card-media">
+                <img src="./assets/images/dating/male1.jpg" alt="Michael Chen">
+                <span class="new-badge">New</span>
+              </div>
+              <div class="dating-card-content">
+                <h3 class="dating-name">Michael Chen</h3>
+                <span class="dating-age-location">28 • Los Angeles</span>
+                <p class="dating-bio">
+                  Software engineer who loves hiking.
+                  Weekend musician, play guitar & piano.
+                  Looking for my partner in adventure.
+                  Passionate about sustainability.
+                  Let's explore the world together! 🌍
+                </p>
+                <button class="chat-profile-btn" onclick="initiateChat('michael')">
+                  <ion-icon name="chatbubble"></ion-icon>
+                  Chat
+                </button>
+              </div>
+            </div>
+
+            <div class="dating-card">
+              <div class="dating-card-media">
+                <img src="./assets/images/dating/female2.jpg" alt="Emma Williams">
+                <span class="online-badge">Online</span>
+              </div>
+              <div class="dating-card-content">
+                <h3 class="dating-name">Emma Williams</h3>
+                <span class="dating-age-location">26 • Miami</span>
+                <p class="dating-bio">
+                  Beach lover and sunset chaser.
+                  Fitness enthusiast, yoga instructor.
+                  Love cooking healthy meals at home.
+                  Looking for genuine connections only.
+                  Positive vibes and good energy! ✨
+                </p>
+                <button class="chat-profile-btn" onclick="initiateChat('emma')">
+                  <ion-icon name="chatbubble"></ion-icon>
+                  Chat
+                </button>
+              </div>
+            </div>
+
+            <div class="dating-card">
+              <div class="dating-card-media">
+                <img src="./assets/images/dating/male2.jpg" alt="David Martinez">
+              </div>
+              <div class="dating-card-content">
+                <h3 class="dating-name">David Martinez</h3>
+                <span class="dating-age-location">30 • Chicago</span>
+                <p class="dating-bio">
+                  Chef by profession, foodie by passion.
+                  Love creating culinary experiences.
+                  Family-oriented and love kids.
+                  Weekend farmer's market enthusiast.
+                  Let me cook you dinner sometime! 🍳
+                </p>
+                <button class="chat-profile-btn" onclick="initiateChat('david')">
+                  <ion-icon name="chatbubble"></ion-icon>
+                  Chat
+                </button>
+              </div>
+            </div>
+
+            <div class="dating-card">
+              <div class="dating-card-media">
+                <img src="./assets/images/dating/female4.jpg" alt="Jessica Brown">
+              </div>
+              <div class="dating-card-content">
+                <h3 class="dating-name">Jessica Brown</h3>
+                <span class="dating-age-location">25 • Seattle</span>
+                <p class="dating-bio">
+                  Coffee addict and bookworm.
+                  Work at a tech startup.
+                  Love rainy days and cozy nights in.
+                  Looking for intellectual conversations.
+                  Swipe right if you love dogs! 🐕
+                </p>
+                <button class="chat-profile-btn" onclick="initiateChat('jessica')">
+                  <ion-icon name="chatbubble"></ion-icon>
+                  Chat
+                </button>
+              </div>
+            </div>
+
+            <div class="dating-card">
+              <div class="dating-card-media">
+                <img src="./assets/images/dating/male3.jpg" alt="Alex Thompson">
+                <span class="new-badge">New</span>
+              </div>
+              <div class="dating-card-content">
+                <h3 class="dating-name">Alex Thompson</h3>
+                <span class="dating-age-location">27 • Boston</span>
+                <p class="dating-bio">
+                  Medical student with big dreams.
+                  Love hiking and outdoor adventures.
+                  Play basketball every weekend.
+                  Looking for someone ambitious.
+                  Let's build something together! 💪
+                </p>
+                <button class="chat-profile-btn" onclick="initiateChat('alex')">
+                  <ion-icon name="chatbubble"></ion-icon>
+                  Chat
+                </button>
+              </div>
+            </div>
+
+            <div class="dating-card">
+              <div class="dating-card-media">
+                <img src="./assets/images/dating/female5.jpg" alt="Olivia Davis">
+                <span class="online-badge">Online</span>
+              </div>
+              <div class="dating-card-content">
+                <h3 class="dating-name">Olivia Davis</h3>
+                <span class="dating-age-location">23 • San Francisco</span>
+                <p class="dating-bio">
+                  Artist and free spirit.
+                  Love painting and creating.
+                  Travel is my therapy.
+                  Looking for genuine souls.
+                  Life is too short for small talk! 🎨
+                </p>
+                <button class="chat-profile-btn" onclick="initiateChat('olivia')">
+                  <ion-icon name="chatbubble"></ion-icon>
+                  Chat
+                </button>
+              </div>
+            </div>
+
+            <div class="dating-card">
+              <div class="dating-card-media">
+                <img src="./assets/images/dating/female6.jpg" alt="Sophia Lee">
+                <span class="new-badge">New</span>
+              </div>
+              <div class="dating-card-content">
+                <h3 class="dating-name">Sophia Lee</h3>
+                <span class="dating-age-location">29 • Denver</span>
+                <p class="dating-bio">
+                  Mountain lover and ski instructor.
+                  Summer hiking, winter skiing.
+                  Love photography and nature.
+                  Looking for adventure partner.
+                  Let's explore the mountains! ⛷️
+                </p>
+                <button class="chat-profile-btn" onclick="initiateChat('sophia')">
+                  <ion-icon name="chatbubble"></ion-icon>
+                  Chat
+                </button>
+              </div>
+            </div>
+
+            <div class="dating-card">
+              <div class="dating-card-media">
+                <img src="./assets/images/dating/pretty-young-woman-indoor_624325-3467.jpg" alt="Isabella Rose">
+                <span class="online-badge">Online</span>
+              </div>
+              <div class="dating-card-content">
+                <h3 class="dating-name">Isabella Rose</h3>
+                <span class="dating-age-location">22 • Austin</span>
+                <p class="dating-bio">
+                  Music lover and aspiring singer.
+                  Concert goer and festival enthusiast.
+                  Love spontaneous road trips.
+                  Looking for my duet partner.
+                  Let's make memories together! 🎵
+                </p>
+                <button class="chat-profile-btn" onclick="initiateChat('isabella')">
+                  <ion-icon name="chatbubble"></ion-icon>
+                  Chat
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="load-more-container">
+            <button class="load-more-btn" onclick="loadMoreProfiles()">
+              <ion-icon name="refresh"></ion-icon>
+              Load More Profiles
+            </button>
+          </div>
+        </div>
+      </section>
+
+    </article>
+  </main>
+
+  <!-- UPLOAD PROFILE MODAL -->
+  <div class="dating-modal" id="uploadModal" style="display: none;">
+    <div class="dating-modal-content">
+      <div class="modal-header">
+        <h2>Create Your Dating Profile</h2>
+        <button class="modal-close-btn" onclick="closeUploadModal()">
+          <ion-icon name="close"></ion-icon>
+        </button>
+      </div>
+      <form class="dating-upload-form" id="profileForm" onsubmit="submitProfile(event)">
+        <div class="form-group">
+          <label>Upload Photo or Video</label>
+          <div class="media-upload-area" id="mediaUploadArea">
+            <input type="file" id="mediaInput" accept="image/*,video/*" hidden onchange="previewMedia(event)">
+            <div class="upload-placeholder" onclick="document.getElementById('mediaInput').click()">
+              <ion-icon name="cloud-upload"></ion-icon>
+              <span>Click to upload photo or video</span>
+              <small>Max 50MB • JPG, PNG, MP4</small>
+            </div>
+            <div class="media-preview" id="mediaPreview" style="display: none;"></div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="profileName">Your Name</label>
+          <input type="text" id="profileName" placeholder="Enter your name" required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="profileAge">Age</label>
+            <input type="number" id="profileAge" placeholder="Age" min="18" max="99" required>
+          </div>
+          <div class="form-group">
+            <label for="profileLocation">Location</label>
+            <input type="text" id="profileLocation" placeholder="City" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="profileBio">Bio (5 lines about yourself)</label>
+          <textarea id="profileBio" rows="5" placeholder="Tell us about yourself in 5 lines..." required maxlength="300"></textarea>
+          <small class="char-count"><span id="charCount">0</span>/300 characters</small>
+        </div>
+
+        <button type="submit" class="submit-profile-btn">
+          <ion-icon name="heart"></ion-icon>
+          Create Profile
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- PAYMENT MODAL -->
+  <div class="dating-modal" id="paymentModal" style="display: none;">
+    <div class="dating-modal-content payment-modal-content">
+      <div class="modal-header">
+        <h2>Unlock Chat Feature</h2>
+        <button class="modal-close-btn" onclick="closePaymentModal()">
+          <ion-icon name="close"></ion-icon>
+        </button>
+      </div>
+      
+      <div class="payment-details">
+        <div class="payment-icon">
+          <ion-icon name="heart-circle"></ion-icon>
+        </div>
+        <h3>Chat with Anyone for 1 Year!</h3>
+        <p>Unlock unlimited messaging with all profiles on Styn Dating. Connect, chat, and find your perfect match!</p>
+        
+        <div class="payment-features">
+          <div class="feature-item">
+            <ion-icon name="checkmark-circle"></ion-icon>
+            <span>Unlimited messages to all profiles</span>
+          </div>
+          <div class="feature-item">
+            <ion-icon name="checkmark-circle"></ion-icon>
+            <span>Valid for 1 full year</span>
+          </div>
+          <div class="feature-item">
+            <ion-icon name="checkmark-circle"></ion-icon>
+            <span>Priority in search results</span>
+          </div>
+          <div class="feature-item">
+            <ion-icon name="checkmark-circle"></ion-icon>
+            <span>See who viewed your profile</span>
+          </div>
+        </div>
+
+        <div class="payment-price">
+          <span class="price-label">One-time payment</span>
+          <span class="price-amount">$3.00</span>
+          <span class="price-period">/ year</span>
+        </div>
+
+        <form class="payment-form" id="datingPaymentForm" onsubmit="processPayment(event)">
+          <div class="form-group">
+            <label>Card Number</label>
+            <input type="text" placeholder="1234 5678 9012 3456" required pattern="[0-9\s]{13,19}" maxlength="19">
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Expiry Date</label>
+              <input type="text" placeholder="MM/YY" required pattern="[0-9]{2}/[0-9]{2}" maxlength="5">
+            </div>
+            <div class="form-group">
+              <label>CVV</label>
+              <input type="text" placeholder="123" required pattern="[0-9]{3,4}" maxlength="4">
+            </div>
+          </div>
+          <button type="submit" class="pay-now-btn">
+            <ion-icon name="lock-closed"></ion-icon>
+            Pay $3.00 Now
+          </button>
+        </form>
+
+        <p class="payment-note">
+          <ion-icon name="shield-checkmark"></ion-icon>
+          Secure payment powered by Stripe
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHAT LOCKED MODAL -->
+  <div class="dating-modal" id="chatLockedModal" style="display: none;">
+    <div class="dating-modal-content chat-locked-content">
+      <div class="locked-icon">
+        <ion-icon name="lock-closed"></ion-icon>
+      </div>
+      <h3>Chat Feature Locked</h3>
+      <p>To chat with people on Styn Dating, you need to unlock the chat feature for just $3/year.</p>
+      <div class="locked-actions">
+        <button class="unlock-now-btn" onclick="closeChatLockedModal(); openPaymentModal();">
+          <ion-icon name="lock-open"></ion-icon>
+          Unlock for $3
+        </button>
+        <button class="cancel-btn" onclick="closeChatLockedModal()">
+          Maybe Later
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-bottom">
+      <div class="container">
+        <p class="copyright">
+          &copy; 2026 <a href="#">Styn</a>. All Rights Reserved
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- GO TO TOP -->
+  <a href="#top" class="go-top" data-go-top>
+    <ion-icon name="chevron-up"></ion-icon>
+  </a>
+
+  <!-- SCRIPTS -->
+  <script src="./assets/js/script.js"></script>
+  <script src="./assets/js/auth.js"></script>
+  <script>
+    // Dating Page JavaScript
+    
+    // Check if chat is unlocked
+    function isChatUnlocked() {
+      const unlockData = localStorage.getItem('datingChatUnlocked');
+      if (unlockData) {
+        const data = JSON.parse(unlockData);
+        const expiryDate = new Date(data.expiryDate);
+        if (expiryDate > new Date()) {
+          return true;
+        } else {
+          localStorage.removeItem('datingChatUnlocked');
+        }
+      }
+      return false;
+    }
+
+    // Update UI based on unlock status
+    function updateUnlockStatus() {
+      const unlockBanner = document.getElementById('unlockBanner');
+      const unlockedBanner = document.getElementById('unlockedBanner');
+      const expiryDateEl = document.getElementById('expiryDate');
+
+      if (isChatUnlocked()) {
+        const unlockData = JSON.parse(localStorage.getItem('datingChatUnlocked'));
+        const expiryDate = new Date(unlockData.expiryDate);
+        
+        if (unlockBanner) unlockBanner.style.display = 'none';
+        if (unlockedBanner) unlockedBanner.style.display = 'flex';
+        if (expiryDateEl) expiryDateEl.textContent = expiryDate.toLocaleDateString('en-US', { 
+          year: 'numeric', 
+          month: 'long', 
+          day: 'numeric' 
+        });
+      } else {
+        if (unlockBanner) unlockBanner.style.display = 'block';
+        if (unlockedBanner) unlockedBanner.style.display = 'none';
+      }
+    }
+
+    // Open upload modal
+    function openUploadModal() {
+      const user = localStorage.getItem('user');
+      if (!user) {
+        alert('Please sign in to create a dating profile.');
+        window.location.href = './login.html';
+        return;
+      }
+      document.getElementById('uploadModal').style.display = 'flex';
+    }
+
+    // Close upload modal
+    function closeUploadModal() {
+      document.getElementById('uploadModal').style.display = 'none';
+    }
+
+    // Open payment modal
+    function openPaymentModal() {
+      const user = localStorage.getItem('user');
+      if (!user) {
+        alert('Please sign in to unlock the chat feature.');
+        window.location.href = './login.html';
+        return;
+      }
+      document.getElementById('paymentModal').style.display = 'flex';
+    }
+
+    // Close payment modal
+    function closePaymentModal() {
+      document.getElementById('paymentModal').style.display = 'none';
+    }
+
+    // Open chat locked modal
+    function openChatLockedModal() {
+      document.getElementById('chatLockedModal').style.display = 'flex';
+    }
+
+    // Close chat locked modal
+    function closeChatLockedModal() {
+      document.getElementById('chatLockedModal').style.display = 'none';
+    }
+
+    // Preview uploaded media
+    function previewMedia(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const preview = document.getElementById('mediaPreview');
+      const placeholder = document.querySelector('.upload-placeholder');
+      
+      preview.innerHTML = '';
+      
+      if (file.type.startsWith('image/')) {
+        const img = document.createElement('img');
+        img.src = URL.createObjectURL(file);
+        preview.appendChild(img);
+      } else if (file.type.startsWith('video/')) {
+        const video = document.createElement('video');
+        video.src = URL.createObjectURL(file);
+        video.controls = true;
+        preview.appendChild(video);
+      }
+
+      placeholder.style.display = 'none';
+      preview.style.display = 'block';
+    }
+
+    // Submit profile
+    function submitProfile(event) {
+      event.preventDefault();
+      
+      const name = document.getElementById('profileName').value;
+      const age = document.getElementById('profileAge').value;
+      const location = document.getElementById('profileLocation').value;
+      const bio = document.getElementById('profileBio').value;
+      
+      // In a real app, this would upload to a server
+      alert(`Profile created successfully!\n\nName: ${name}\nAge: ${age}\nLocation: ${location}`);
+      closeUploadModal();
+      
+      // Reset form
+      document.getElementById('profileForm').reset();
+      document.getElementById('mediaPreview').style.display = 'none';
+      document.querySelector('.upload-placeholder').style.display = 'flex';
+    }
+
+    // Process payment
+    function processPayment(event) {
+      event.preventDefault();
+      
+      // Simulate payment processing
+      const payBtn = event.target.querySelector('.pay-now-btn');
+      payBtn.innerHTML = '<ion-icon name="sync" class="spinning"></ion-icon> Processing...';
+      payBtn.disabled = true;
+
+      setTimeout(() => {
+        // Save unlock status
+        const expiryDate = new Date();
+        expiryDate.setFullYear(expiryDate.getFullYear() + 1);
+        
+        localStorage.setItem('datingChatUnlocked', JSON.stringify({
+          unlocked: true,
+          unlockedDate: new Date().toISOString(),
+          expiryDate: expiryDate.toISOString()
+        }));
+
+        closePaymentModal();
+        updateUnlockStatus();
+        
+        alert('🎉 Chat feature unlocked! You can now chat with anyone for 1 year.');
+        
+        payBtn.innerHTML = '<ion-icon name="lock-closed"></ion-icon> Pay $3.00 Now';
+        payBtn.disabled = false;
+      }, 2000);
+    }
+
+    // Initiate chat with a profile
+    function initiateChat(profileId) {
+      const user = localStorage.getItem('user');
+      if (!user) {
+        alert('Please sign in to chat with people.');
+        window.location.href = './login.html';
+        return;
+      }
+
+      if (!isChatUnlocked()) {
+        openChatLockedModal();
+        return;
+      }
+
+      // In a real app, this would open the chat
+      alert(`Starting chat with ${profileId}... This would redirect to the chat page in a real application.`);
+    }
+
+    // Toggle media play/pause
+    function toggleMedia(btn) {
+      const video = btn.closest('.dating-card-media').querySelector('video');
+      if (video) {
+        if (video.paused) {
+          video.play();
+          btn.innerHTML = '<ion-icon name="pause"></ion-icon>';
+        } else {
+          video.pause();
+          btn.innerHTML = '<ion-icon name="play"></ion-icon>';
+        }
+      }
+    }
+
+    // Load more profiles
+    function loadMoreProfiles() {
+      alert('Loading more profiles... This would fetch more profiles from the server in a real application.');
+    }
+
+    // Bio character count
+    const bioTextarea = document.getElementById('profileBio');
+    const charCount = document.getElementById('charCount');
+    
+    if (bioTextarea && charCount) {
+      bioTextarea.addEventListener('input', function() {
+        charCount.textContent = this.value.length;
+      });
+    }
+
+    // Filter buttons
+    document.querySelectorAll('.filter-options .filter-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.filter-options .filter-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        // In a real app, this would filter the profiles
+      });
+    });
+
+    // Close modals when clicking outside
+    document.querySelectorAll('.dating-modal').forEach(modal => {
+      modal.addEventListener('click', function(e) {
+        if (e.target === this) {
+          this.style.display = 'none';
+        }
+      });
+    });
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', function() {
+      updateUnlockStatus();
+    });
+  </script>
+
+</body>
+</html>
+
