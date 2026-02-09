@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Content Moderation - Styn Admin</title>
+
+  <link rel="shortcut icon" href="../assets/images/site_logo.png" type="image/png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/admin.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Kaushan+Script&family=Pacifico&display=swap" rel="stylesheet">
+</head>
+
+<body id="top" class="admin-body">
+
+  <div class="admin-wrapper">
+    <aside class="admin-sidebar" id="adminSidebar">
+      <div class="sidebar-header">
+        <a href="../index.html" class="admin-logo"><img src="../assets/images/logo.png" alt="Styn" class="logo-img"><span class="logo-tagline">A Unique Experience.</span></a>
+        <span class="admin-badge">Admin</span>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-section">
+          <span class="nav-section-title">Main</span>
+          <ul class="nav-list">
+            <li><a href="./index.html" class="nav-link"><ion-icon name="grid-outline"></ion-icon><span>Dashboard</span></a></li>
+            <li><a href="./analytics.html" class="nav-link"><ion-icon name="bar-chart-outline"></ion-icon><span>Analytics</span></a></li>
+          </ul>
+        </div>
+        <div class="nav-section">
+          <span class="nav-section-title">Management</span>
+          <ul class="nav-list">
+            <li><a href="./movies.html" class="nav-link"><ion-icon name="film-outline"></ion-icon><span>Movies</span></a></li>
+            <li><a href="./users.html" class="nav-link"><ion-icon name="people-outline"></ion-icon><span>Users</span></a></li>
+            <li><a href="./content.html" class="nav-link active"><ion-icon name="videocam-outline"></ion-icon><span>Content</span><span class="nav-badge warning">12</span></a></li>
+            <li><a href="./ads.html" class="nav-link"><ion-icon name="megaphone-outline"></ion-icon><span>Advertisements</span></a></li>
+            <li><a href="./live.html" class="nav-link"><ion-icon name="radio-outline"></ion-icon><span>Live Streams</span></a></li>
+            <li><a href="./dating.html" class="nav-link"><ion-icon name="heart-outline"></ion-icon><span>Dating</span></a></li>
+          </ul>
+        </div>
+        <div class="nav-section">
+          <span class="nav-section-title">System</span>
+          <ul class="nav-list">
+            <li><a href="./settings.html" class="nav-link"><ion-icon name="settings-outline"></ion-icon><span>Settings</span></a></li>
+            <li><a href="../index.html" class="nav-link"><ion-icon name="home-outline"></ion-icon><span>View Site</span></a></li>
+            <li><a href="#" class="nav-link" onclick="adminLogout()"><ion-icon name="log-out-outline"></ion-icon><span>Logout</span></a></li>
+          </ul>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="admin-main">
+      <header class="admin-topbar">
+        <button class="sidebar-toggle" id="sidebarToggle"><ion-icon name="menu-outline"></ion-icon></button>
+        <div class="topbar-search"><ion-icon name="search-outline"></ion-icon><input type="text" placeholder="Search content..."></div>
+        <div class="topbar-actions">
+          <button class="topbar-btn notification-btn"><ion-icon name="notifications-outline"></ion-icon><span class="notification-dot"></span></button>
+          <div class="admin-profile">
+            <div class="admin-avatar"><ion-icon name="person"></ion-icon></div>
+            <div class="admin-info"><span class="admin-name">Admin</span><span class="admin-role">Super Admin</span></div>
+          </div>
+        </div>
+      </header>
+
+      <div class="admin-content">
+        <div class="page-header">
+          <div class="page-title">
+            <h1>Content Moderation</h1>
+            <p>Review and moderate user-generated content</p>
+          </div>
+        </div>
+
+        <!-- STATS -->
+        <div class="stats-row">
+          <div class="stat-card">
+            <div class="stat-icon" style="background: rgba(234, 179, 8, 0.15); color: #eab308;"><ion-icon name="time"></ion-icon></div>
+            <div class="stat-content"><span class="stat-value">12</span><span class="stat-label">Pending Review</span></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon" style="background: rgba(239, 68, 68, 0.15); color: #ef4444;"><ion-icon name="flag"></ion-icon></div>
+            <div class="stat-content"><span class="stat-value">8</span><span class="stat-label">Reported Content</span></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon revenue"><ion-icon name="checkmark-circle"></ion-icon></div>
+            <div class="stat-content"><span class="stat-value">1,245</span><span class="stat-label">Approved Today</span></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon movies"><ion-icon name="trash"></ion-icon></div>
+            <div class="stat-content"><span class="stat-value">23</span><span class="stat-label">Removed Today</span></div>
+          </div>
+        </div>
+
+        <!-- TABS -->
+        <div class="admin-tabs">
+          <button class="admin-tab active" data-tab="pending">Pending Review (12)</button>
+          <button class="admin-tab" data-tab="reported">Reported (8)</button>
+          <button class="admin-tab" data-tab="approved">Approved</button>
+          <button class="admin-tab" data-tab="removed">Removed</button>
+        </div>
+
+        <!-- CONTENT GRID -->
+        <div class="content-grid" id="contentGrid">
+          <!-- Content cards loaded by JS -->
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- CONTENT REVIEW MODAL -->
+  <div class="admin-modal" id="reviewModal" style="display: none;">
+    <div class="admin-modal-content" style="max-width: 700px;">
+      <button class="modal-close-btn" onclick="closeReviewModal()"><ion-icon name="close-outline"></ion-icon></button>
+      <h2 class="modal-title">Review Content</h2>
+      
+      <div class="review-content-preview">
+        <div class="preview-video">
+          <ion-icon name="play-circle"></ion-icon>
+        </div>
+      </div>
+      
+      <div class="review-content-info">
+        <h3 id="reviewTitle">Content Title</h3>
+        <p id="reviewDescription">Content description...</p>
+        <div class="review-meta">
+          <span><ion-icon name="person-outline"></ion-icon> <span id="reviewAuthor">Username</span></span>
+          <span><ion-icon name="time-outline"></ion-icon> <span id="reviewDate">Jan 15, 2024</span></span>
+          <span><ion-icon name="flag-outline"></ion-icon> <span id="reviewReports">3 reports</span></span>
+        </div>
+      </div>
+      
+      <div class="review-reports">
+        <h4>Report Reasons</h4>
+        <ul id="reportReasons">
+          <li>Inappropriate content</li>
+          <li>Spam or misleading</li>
+          <li>Copyright violation</li>
+        </ul>
+      </div>
+      
+      <div class="form-actions" style="justify-content: center; gap: 16px; margin-top: 24px;">
+        <button class="btn-admin success" onclick="approveContent()"><ion-icon name="checkmark-outline"></ion-icon>Approve</button>
+        <button class="btn-admin secondary" onclick="closeReviewModal()">Skip</button>
+        <button class="btn-admin danger" onclick="removeContent()"><ion-icon name="trash-outline"></ion-icon>Remove</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../assets/js/admin/content.js"></script>
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</body>
+
+</html>
+

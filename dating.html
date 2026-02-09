@@ -8,12 +8,12 @@
   <title>Dating - Styn</title>
 
   <!-- FAVICON -->
-  <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="shortcut icon" href="./assets/images/site_logo.png" type="image/png">
 
   <!-- GOOGLE FONTS -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Pacifico&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Kaushan+Script&family=Pacifico&display=swap" rel="stylesheet">
 
   <!-- STYLESHEET -->
   <link rel="stylesheet" href="./assets/css/style.css">
@@ -34,7 +34,8 @@
       <div class="container">
         <!-- SITE NAME (LEFT) -->
         <a href="./index.html" class="header-logo">
-          <span class="logo-text">Styn</span>
+          <img src="./assets/images/logo.png" alt="Styn" class="logo-img">
+          <span class="logo-tagline">A Unique Experience.</span>
         </a>
         
         <!-- SEARCH BAR (CENTER) -->
@@ -83,7 +84,7 @@
     <nav class="navbar" data-navbar>
       <div class="navbar-top">
         <a href="./index.html" class="logo">
-          <span class="logo-text">Styn</span>
+          <img src="./assets/images/logo.png" alt="Styn" class="logo-img">
         </a>
         <button class="menu-close-btn" data-menu-close-btn>
           <ion-icon name="close-outline"></ion-icon>
@@ -131,27 +132,31 @@
         <div class="container">
           <div class="dating-hero-content">
             <h1 class="dating-title">Find Your <span class="highlight">Perfect Match</span></h1>
-            <p class="dating-subtitle">Connect with amazing people looking for love. Create your profile and start chatting today!</p>
+            <p class="dating-subtitle">Connect with amazing people looking for love. Create your profile and start chatting — <strong style="color: var(--primary-yellow); font-size: 1.1em;">100% FREE!</strong></p>
             
-            <!-- Unlock Chat Banner -->
-            <div class="unlock-chat-banner" id="unlockBanner">
-              <div class="unlock-content">
-                <ion-icon name="heart-circle" class="unlock-icon"></ion-icon>
-                <div class="unlock-text">
-                  <h3>Unlock Chat Feature</h3>
-                  <p>Pay just <span class="price">$3</span> to chat with all profiles for a whole year!</p>
+            <!-- Free Chat Banner -->
+            <div class="free-chat-banner">
+              <div class="free-banner-content">
+                <ion-icon name="heart-circle" class="free-banner-icon"></ion-icon>
+                <div class="free-banner-text">
+                  <h3>Chat is <span style="color: var(--primary-yellow);">FREE</span></h3>
+                  <p>Sign up and start chatting with anyone — no payment needed!</p>
                 </div>
-                <button class="unlock-btn" id="unlockChatBtn" onclick="openPaymentModal()">
-                  <ion-icon name="lock-open"></ion-icon>
-                  Unlock Now
-                </button>
+                <div class="free-banner-badges">
+                  <span class="free-badge-pill"><ion-icon name="chatbubbles"></ion-icon> Free Chat</span>
+                  <span class="free-badge-pill"><ion-icon name="shield-checkmark"></ion-icon> Private</span>
+                  <span class="free-badge-pill"><ion-icon name="eye-off"></ion-icon> Anonymous</span>
+                </div>
               </div>
             </div>
 
-            <!-- Unlocked Status (Hidden by default) -->
-            <div class="chat-unlocked-banner" id="unlockedBanner" style="display: none;">
-              <ion-icon name="checkmark-circle"></ion-icon>
-              <span>Chat Unlocked! You can message anyone until <span id="expiryDate"></span></span>
+            <!-- Privacy Notice -->
+            <div class="privacy-notice-banner">
+              <ion-icon name="finger-print"></ion-icon>
+              <div>
+                <strong>Your Privacy Matters</strong>
+                <p>Use a display name, enable Ghost Mode, and blur your photos. Your identity stays protected.</p>
+              </div>
             </div>
           </div>
         </div>
@@ -471,7 +476,7 @@
 
         <div class="payment-price">
           <span class="price-label">One-time payment</span>
-          <span class="price-amount">$3.00</span>
+          <span class="price-amount">$1.00</span>
           <span class="price-period">/ year</span>
         </div>
 
@@ -492,7 +497,7 @@
           </div>
           <button type="submit" class="pay-now-btn">
             <ion-icon name="lock-closed"></ion-icon>
-            Pay $3.00 Now
+            Pay $1.00 Now
           </button>
         </form>
 
@@ -511,11 +516,11 @@
         <ion-icon name="lock-closed"></ion-icon>
       </div>
       <h3>Chat Feature Locked</h3>
-      <p>To chat with people on Styn Dating, you need to unlock the chat feature for just $3/year.</p>
+      <p>To chat with people on Styn Dating, you need to unlock the chat feature for just $1/year.</p>
       <div class="locked-actions">
         <button class="unlock-now-btn" onclick="closeChatLockedModal(); openPaymentModal();">
           <ion-icon name="lock-open"></ion-icon>
-          Unlock for $3
+          Unlock for $1
         </button>
         <button class="cancel-btn" onclick="closeChatLockedModal()">
           Maybe Later
@@ -541,8 +546,8 @@
   </a>
 
   <!-- SCRIPTS -->
-  <script src="./assets/js/script.js"></script>
-  <script src="./assets/js/auth.js"></script>
+  <script src="./assets/js/main/script.js"></script>
+  <script src="./assets/js/main/auth.js"></script>
   <script>
     // Dating Page JavaScript
     
@@ -695,7 +700,7 @@
         
         alert('🎉 Chat feature unlocked! You can now chat with anyone for 1 year.');
         
-        payBtn.innerHTML = '<ion-icon name="lock-closed"></ion-icon> Pay $3.00 Now';
+        payBtn.innerHTML = '<ion-icon name="lock-closed"></ion-icon> Pay $1.00 Now';
         payBtn.disabled = false;
       }, 2000);
     }

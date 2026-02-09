@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - Styn</title>
+
+  <link rel="shortcut icon" href="../assets/images/site_logo.png" type="image/png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/admin.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Kaushan+Script&family=Pacifico&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body id="top" class="admin-body">
+
+  <div class="admin-wrapper">
+    <!-- SIDEBAR -->
+    <aside class="admin-sidebar" id="adminSidebar">
+      <div class="sidebar-header">
+        <a href="../index.html" class="admin-logo">
+          <img src="../assets/images/logo.png" alt="Styn" class="logo-img">
+          <span class="logo-tagline">A Unique Experience.</span>
+        </a>
+        <span class="admin-badge">Admin</span>
+      </div>
+      
+      <nav class="sidebar-nav">
+        <div class="nav-section">
+          <span class="nav-section-title">Main</span>
+          <ul class="nav-list">
+            <li>
+              <a href="./index.html" class="nav-link active">
+                <ion-icon name="grid-outline"></ion-icon>
+                <span>Dashboard</span>
+              </a>
+            </li>
+            <li>
+              <a href="./analytics.html" class="nav-link">
+                <ion-icon name="bar-chart-outline"></ion-icon>
+                <span>Analytics</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+        
+        <div class="nav-section">
+          <span class="nav-section-title">Management</span>
+          <ul class="nav-list">
+            <li>
+              <a href="./movies.html" class="nav-link">
+                <ion-icon name="film-outline"></ion-icon>
+                <span>Movies</span>
+                <span class="nav-badge">247</span>
+              </a>
+            </li>
+            <li>
+              <a href="./users.html" class="nav-link">
+                <ion-icon name="people-outline"></ion-icon>
+                <span>Users</span>
+              </a>
+            </li>
+            <li>
+              <a href="./content.html" class="nav-link">
+                <ion-icon name="videocam-outline"></ion-icon>
+                <span>Content</span>
+                <span class="nav-badge warning">12</span>
+              </a>
+            </li>
+            <li>
+              <a href="./ads.html" class="nav-link">
+                <ion-icon name="megaphone-outline"></ion-icon>
+                <span>Advertisements</span>
+              </a>
+            </li>
+            <li>
+              <a href="./live.html" class="nav-link">
+                <ion-icon name="radio-outline"></ion-icon>
+                <span>Live Streams</span>
+              </a>
+            </li>
+            <li>
+              <a href="./dating.html" class="nav-link">
+                <ion-icon name="heart-outline"></ion-icon>
+                <span>Dating</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+        
+        <div class="nav-section">
+          <span class="nav-section-title">System</span>
+          <ul class="nav-list">
+            <li>
+              <a href="./settings.html" class="nav-link">
+                <ion-icon name="settings-outline"></ion-icon>
+                <span>Settings</span>
+              </a>
+            </li>
+            <li>
+              <a href="../index.html" class="nav-link">
+                <ion-icon name="home-outline"></ion-icon>
+                <span>View Site</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="nav-link" onclick="adminLogout()">
+                <ion-icon name="log-out-outline"></ion-icon>
+                <span>Logout</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="admin-main">
+      <!-- TOP BAR -->
+      <header class="admin-topbar">
+        <button class="sidebar-toggle" id="sidebarToggle">
+          <ion-icon name="menu-outline"></ion-icon>
+        </button>
+        
+        <div class="topbar-search">
+          <ion-icon name="search-outline"></ion-icon>
+          <input type="text" placeholder="Search...">
+        </div>
+        
+        <div class="topbar-actions">
+          <button class="topbar-btn notification-btn">
+            <ion-icon name="notifications-outline"></ion-icon>
+            <span class="notification-dot"></span>
+          </button>
+          <button class="topbar-btn">
+            <ion-icon name="mail-outline"></ion-icon>
+          </button>
+          <div class="admin-profile">
+            <div class="admin-avatar">
+              <ion-icon name="person"></ion-icon>
+            </div>
+            <div class="admin-info">
+              <span class="admin-name">Admin</span>
+              <span class="admin-role">Super Admin</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- DASHBOARD CONTENT -->
+      <div class="admin-content">
+        <!-- PAGE HEADER -->
+        <div class="page-header">
+          <div class="page-title">
+            <h1>Dashboard</h1>
+            <p>Welcome back! Here's what's happening with your platform.</p>
+          </div>
+          <div class="page-actions">
+            <button class="btn-admin secondary">
+              <ion-icon name="download-outline"></ion-icon>
+              Export Report
+            </button>
+            <button class="btn-admin primary">
+              <ion-icon name="add-outline"></ion-icon>
+              Add Movie
+            </button>
+          </div>
+        </div>
+
+        <!-- STATS CARDS -->
+        <div class="stats-row">
+          <div class="stat-card">
+            <div class="stat-icon users">
+              <ion-icon name="people"></ion-icon>
+            </div>
+            <div class="stat-content">
+              <span class="stat-value">12,543</span>
+              <span class="stat-label">Total Users</span>
+            </div>
+            <div class="stat-trend up">
+              <ion-icon name="trending-up"></ion-icon>
+              <span>+12.5%</span>
+            </div>
+          </div>
+          
+          <div class="stat-card">
+            <div class="stat-icon revenue">
+              <ion-icon name="cash"></ion-icon>
+            </div>
+            <div class="stat-content">
+              <span class="stat-value">$45,230</span>
+              <span class="stat-label">Total Revenue</span>
+            </div>
+            <div class="stat-trend up">
+              <ion-icon name="trending-up"></ion-icon>
+              <span>+8.2%</span>
+            </div>
+          </div>
+          
+          <div class="stat-card">
+            <div class="stat-icon movies">
+              <ion-icon name="film"></ion-icon>
+            </div>
+            <div class="stat-content">
+              <span class="stat-value">247</span>
+              <span class="stat-label">Movies</span>
+            </div>
+            <div class="stat-trend up">
+              <ion-icon name="trending-up"></ion-icon>
+              <span>+5</span>
+            </div>
+          </div>
+          
+          <div class="stat-card">
+            <div class="stat-icon views">
+              <ion-icon name="eye"></ion-icon>
+            </div>
+            <div class="stat-content">
+              <span class="stat-value">1.2M</span>
+              <span class="stat-label">Total Views</span>
+            </div>
+            <div class="stat-trend up">
+              <ion-icon name="trending-up"></ion-icon>
+              <span>+23.1%</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CHARTS ROW -->
+        <div class="charts-row">
+          <div class="chart-card large">
+            <div class="chart-header">
+              <h3>Revenue Overview</h3>
+              <div class="chart-actions">
+                <select class="chart-select" id="revenueTimeframe">
+                  <option value="week">This Week</option>
+                  <option value="month" selected>This Month</option>
+                  <option value="year">This Year</option>
+                </select>
+              </div>
+            </div>
+            <div class="chart-body">
+              <canvas id="revenueChart"></canvas>
+            </div>
+          </div>
+          
+          <div class="chart-card">
+            <div class="chart-header">
+              <h3>Traffic Sources</h3>
+            </div>
+            <div class="chart-body">
+              <canvas id="trafficChart"></canvas>
+            </div>
+            <div class="chart-legend" id="trafficLegend"></div>
+          </div>
+        </div>
+
+        <!-- SECOND CHARTS ROW -->
+        <div class="charts-row">
+          <div class="chart-card">
+            <div class="chart-header">
+              <h3>User Growth</h3>
+            </div>
+            <div class="chart-body">
+              <canvas id="userGrowthChart"></canvas>
+            </div>
+          </div>
+          
+          <div class="chart-card">
+            <div class="chart-header">
+              <h3>Content Engagement</h3>
+            </div>
+            <div class="chart-body">
+              <canvas id="engagementChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- DATA TABLES ROW -->
+        <div class="tables-row">
+          <!-- RECENT TRANSACTIONS -->
+          <div class="table-card">
+            <div class="table-header">
+              <h3>Recent Transactions</h3>
+              <a href="./analytics.html" class="view-all">View All</a>
+            </div>
+            <div class="table-body">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>User</th>
+                    <th>Movie</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="recentTransactions">
+                  <!-- Loaded by JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+          
+          <!-- TOP MOVIES -->
+          <div class="table-card">
+            <div class="table-header">
+              <h3>Top Performing Movies</h3>
+              <a href="./movies.html" class="view-all">View All</a>
+            </div>
+            <div class="table-body">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Movie</th>
+                    <th>Views</th>
+                    <th>Revenue</th>
+                    <th>Rating</th>
+                  </tr>
+                </thead>
+                <tbody id="topMovies">
+                  <!-- Loaded by JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- ACTIVITY & QUICK ACTIONS -->
+        <div class="bottom-row">
+          <!-- RECENT ACTIVITY -->
+          <div class="activity-card">
+            <div class="card-header">
+              <h3>Recent Activity</h3>
+            </div>
+            <div class="activity-list" id="activityList">
+              <!-- Loaded by JS -->
+            </div>
+          </div>
+          
+          <!-- QUICK ACTIONS -->
+          <div class="quick-actions-card">
+            <div class="card-header">
+              <h3>Quick Actions</h3>
+            </div>
+            <div class="quick-actions-grid">
+              <a href="./movies.html" class="quick-action">
+                <div class="quick-action-icon">
+                  <ion-icon name="film"></ion-icon>
+                </div>
+                <span>Add Movie</span>
+              </a>
+              <a href="./users.html" class="quick-action">
+                <div class="quick-action-icon">
+                  <ion-icon name="person-add"></ion-icon>
+                </div>
+                <span>Add User</span>
+              </a>
+              <a href="./ads.html" class="quick-action">
+                <div class="quick-action-icon">
+                  <ion-icon name="megaphone"></ion-icon>
+                </div>
+                <span>Create Ad</span>
+              </a>
+              <a href="./content.html" class="quick-action">
+                <div class="quick-action-icon warning">
+                  <ion-icon name="flag"></ion-icon>
+                </div>
+                <span>Review Content</span>
+              </a>
+              <a href="./settings.html" class="quick-action">
+                <div class="quick-action-icon">
+                  <ion-icon name="settings"></ion-icon>
+                </div>
+                <span>Settings</span>
+              </a>
+              <a href="./analytics.html" class="quick-action">
+                <div class="quick-action-icon">
+                  <ion-icon name="analytics"></ion-icon>
+                </div>
+                <span>Reports</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- SYSTEM STATUS -->
+          <div class="system-status-card">
+            <div class="card-header">
+              <h3>System Status</h3>
+            </div>
+            <div class="status-list">
+              <div class="status-item">
+                <div class="status-info">
+                  <span class="status-name">Server Uptime</span>
+                  <span class="status-value">99.9%</span>
+                </div>
+                <div class="status-bar">
+                  <div class="status-fill" style="width: 99.9%;"></div>
+                </div>
+              </div>
+              <div class="status-item">
+                <div class="status-info">
+                  <span class="status-name">Storage Used</span>
+                  <span class="status-value">67%</span>
+                </div>
+                <div class="status-bar warning">
+                  <div class="status-fill" style="width: 67%;"></div>
+                </div>
+              </div>
+              <div class="status-item">
+                <div class="status-info">
+                  <span class="status-name">Bandwidth</span>
+                  <span class="status-value">45%</span>
+                </div>
+                <div class="status-bar">
+                  <div class="status-fill" style="width: 45%;"></div>
+                </div>
+              </div>
+              <div class="status-item">
+                <div class="status-info">
+                  <span class="status-name">CDN Status</span>
+                  <span class="status-value online">Online</span>
+                </div>
+                <div class="status-indicator online"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="../assets/js/admin/dashboard.js"></script>
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Advertisement Management - Styn Admin</title>
+
+  <link rel="shortcut icon" href="../assets/images/site_logo.png" type="image/png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/admin.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Kaushan+Script&family=Pacifico&display=swap" rel="stylesheet">
+</head>
+
+<body id="top" class="admin-body">
+
+  <div class="admin-wrapper">
+    <aside class="admin-sidebar" id="adminSidebar">
+      <div class="sidebar-header">
+        <a href="../index.html" class="admin-logo"><img src="../assets/images/logo.png" alt="Styn" class="logo-img"><span class="logo-tagline">A Unique Experience.</span></a>
+        <span class="admin-badge">Admin</span>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-section">
+          <span class="nav-section-title">Main</span>
+          <ul class="nav-list">
+            <li><a href="./index.html" class="nav-link"><ion-icon name="grid-outline"></ion-icon><span>Dashboard</span></a></li>
+            <li><a href="./analytics.html" class="nav-link"><ion-icon name="bar-chart-outline"></ion-icon><span>Analytics</span></a></li>
+          </ul>
+        </div>
+        <div class="nav-section">
+          <span class="nav-section-title">Management</span>
+          <ul class="nav-list">
+            <li><a href="./movies.html" class="nav-link"><ion-icon name="film-outline"></ion-icon><span>Movies</span></a></li>
+            <li><a href="./users.html" class="nav-link"><ion-icon name="people-outline"></ion-icon><span>Users</span></a></li>
+            <li><a href="./content.html" class="nav-link"><ion-icon name="videocam-outline"></ion-icon><span>Content</span></a></li>
+            <li><a href="./ads.html" class="nav-link active"><ion-icon name="megaphone-outline"></ion-icon><span>Advertisements</span></a></li>
+            <li><a href="./live.html" class="nav-link"><ion-icon name="radio-outline"></ion-icon><span>Live Streams</span></a></li>
+            <li><a href="./dating.html" class="nav-link"><ion-icon name="heart-outline"></ion-icon><span>Dating</span></a></li>
+          </ul>
+        </div>
+        <div class="nav-section">
+          <span class="nav-section-title">System</span>
+          <ul class="nav-list">
+            <li><a href="./settings.html" class="nav-link"><ion-icon name="settings-outline"></ion-icon><span>Settings</span></a></li>
+            <li><a href="../index.html" class="nav-link"><ion-icon name="home-outline"></ion-icon><span>View Site</span></a></li>
+            <li><a href="#" class="nav-link" onclick="adminLogout()"><ion-icon name="log-out-outline"></ion-icon><span>Logout</span></a></li>
+          </ul>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="admin-main">
+      <header class="admin-topbar">
+        <button class="sidebar-toggle" id="sidebarToggle"><ion-icon name="menu-outline"></ion-icon></button>
+        <div class="topbar-search"><ion-icon name="search-outline"></ion-icon><input type="text" placeholder="Search ads..."></div>
+        <div class="topbar-actions">
+          <button class="topbar-btn notification-btn"><ion-icon name="notifications-outline"></ion-icon><span class="notification-dot"></span></button>
+          <div class="admin-profile">
+            <div class="admin-avatar"><ion-icon name="person"></ion-icon></div>
+            <div class="admin-info"><span class="admin-name">Admin</span><span class="admin-role">Super Admin</span></div>
+          </div>
+        </div>
+      </header>
+
+      <div class="admin-content">
+        <div class="page-header">
+          <div class="page-title">
+            <h1>Advertisement Management</h1>
+            <p>Create and manage advertising campaigns</p>
+          </div>
+          <div class="page-actions">
+            <button class="btn-admin primary" onclick="showCreateAdModal()"><ion-icon name="add-outline"></ion-icon>Create Campaign</button>
+          </div>
+        </div>
+
+        <!-- STATS -->
+        <div class="stats-row">
+          <div class="stat-card">
+            <div class="stat-icon movies"><ion-icon name="megaphone"></ion-icon></div>
+            <div class="stat-content"><span class="stat-value">24</span><span class="stat-label">Active Campaigns</span></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon views"><ion-icon name="eye"></ion-icon></div>
+            <div class="stat-content"><span class="stat-value">2.4M</span><span class="stat-label">Total Impressions</span></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon users"><ion-icon name="finger-print"></ion-icon></div>
+            <div class="stat-content"><span class="stat-value">156K</span><span class="stat-label">Total Clicks</span></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon revenue"><ion-icon name="cash"></ion-icon></div>
+            <div class="stat-content"><span class="stat-value">$12,450</span><span class="stat-label">Ad Revenue</span></div>
+          </div>
+        </div>
+
+        <!-- TABS -->
+        <div class="admin-tabs">
+          <button class="admin-tab active">All Ads</button>
+          <button class="admin-tab">Banner Ads</button>
+          <button class="admin-tab">Video Ads</button>
+          <button class="admin-tab">Sponsored Posts</button>
+        </div>
+
+        <!-- ADS GRID -->
+        <div class="content-grid" id="adsGrid">
+          <!-- Ad cards loaded by JS -->
+        </div>
+
+        <div class="pagination">
+          <button class="page-btn"><ion-icon name="chevron-back"></ion-icon></button>
+          <button class="page-btn active">1</button>
+          <button class="page-btn">2</button>
+          <button class="page-btn"><ion-icon name="chevron-forward"></ion-icon></button>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- CREATE AD MODAL -->
+  <div class="admin-modal" id="adModal" style="display: none;">
+    <div class="admin-modal-content" style="max-width: 600px;">
+      <button class="modal-close-btn" onclick="closeAdModal()"><ion-icon name="close-outline"></ion-icon></button>
+      <h2 class="modal-title">Create Ad Campaign</h2>
+      
+      <form class="admin-form" id="adForm">
+        <div class="form-group">
+          <label>Campaign Name *</label>
+          <input type="text" required placeholder="e.g., Summer Sale Campaign">
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label>Ad Type *</label>
+            <select required>
+              <option value="">Select Type</option>
+              <option value="banner">Banner Ad</option>
+              <option value="video">Video Ad</option>
+              <option value="sponsored">Sponsored Post</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Placement *</label>
+            <select required>
+              <option value="">Select Placement</option>
+              <option value="home">Home Page</option>
+              <option value="reels">Reels Feed</option>
+              <option value="live">Live Section</option>
+              <option value="chat">Chat Sidebar</option>
+              <option value="dating">Dating Page</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label>Ad Media *</label>
+          <div class="file-upload-area">
+            <ion-icon name="cloud-upload-outline"></ion-icon>
+            <p>Drag and drop or <span>browse</span></p>
+            <p class="form-hint">Images: JPG, PNG (Max 2MB) • Videos: MP4 (Max 100MB)</p>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label>Target URL</label>
+          <input type="url" placeholder="https://example.com/landing-page">
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label>Start Date *</label>
+            <input type="date" required>
+          </div>
+          <div class="form-group">
+            <label>End Date *</label>
+            <input type="date" required>
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label>Daily Budget ($)</label>
+            <input type="number" step="0.01" min="0" placeholder="50.00">
+          </div>
+          <div class="form-group">
+            <label>Total Budget ($)</label>
+            <input type="number" step="0.01" min="0" placeholder="1000.00">
+          </div>
+        </div>
+        
+        <div class="form-actions">
+          <button type="button" class="btn-admin secondary" onclick="closeAdModal()">Cancel</button>
+          <button type="submit" class="btn-admin primary"><ion-icon name="rocket-outline"></ion-icon>Launch Campaign</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="../assets/js/admin/ads.js"></script>
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</body>
+
+</html>
+

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dating Management - Styn Admin</title>
+
+  <link rel="shortcut icon" href="../assets/images/site_logo.png" type="image/png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/admin.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Kaushan+Script&family=Pacifico&display=swap" rel="stylesheet">
+</head>
+
+<body id="top" class="admin-body">
+
+  <div class="admin-wrapper">
+    <aside class="admin-sidebar" id="adminSidebar">
+      <div class="sidebar-header">
+        <a href="../index.html" class="admin-logo"><img src="../assets/images/logo.png" alt="Styn" class="logo-img"><span class="logo-tagline">A Unique Experience.</span></a>
+        <span class="admin-badge">Admin</span>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-section">
+          <span class="nav-section-title">Main</span>
+          <ul class="nav-list">
+            <li><a href="./index.html" class="nav-link"><ion-icon name="grid-outline"></ion-icon><span>Dashboard</span></a></li>
+            <li><a href="./analytics.html" class="nav-link"><ion-icon name="bar-chart-outline"></ion-icon><span>Analytics</span></a></li>
+          </ul>
+        </div>
+        <div class="nav-section">
+          <span class="nav-section-title">Management</span>
+          <ul class="nav-list">
+            <li><a href="./movies.html" class="nav-link"><ion-icon name="film-outline"></ion-icon><span>Movies</span></a></li>
+            <li><a href="./users.html" class="nav-link"><ion-icon name="people-outline"></ion-icon><span>Users</span></a></li>
+            <li><a href="./content.html" class="nav-link"><ion-icon name="videocam-outline"></ion-icon><span>Content</span></a></li>
+            <li><a href="./ads.html" class="nav-link"><ion-icon name="megaphone-outline"></ion-icon><span>Advertisements</span></a></li>
+            <li><a href="./live.html" class="nav-link"><ion-icon name="radio-outline"></ion-icon><span>Live Streams</span></a></li>
+            <li><a href="./dating.html" class="nav-link active"><ion-icon name="heart-outline"></ion-icon><span>Dating</span></a></li>
+          </ul>
+        </div>
+        <div class="nav-section">
+          <span class="nav-section-title">System</span>
+          <ul class="nav-list">
+            <li><a href="./settings.html" class="nav-link"><ion-icon name="settings-outline"></ion-icon><span>Settings</span></a></li>
+            <li><a href="../index.html" class="nav-link"><ion-icon name="home-outline"></ion-icon><span>View Site</span></a></li>
+            <li><a href="#" class="nav-link" onclick="adminLogout()"><ion-icon name="log-out-outline"></ion-icon><span>Logout</span></a></li>
+          </ul>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="admin-main">
+      <header class="admin-topbar">
+        <button class="sidebar-toggle" id="sidebarToggle"><ion-icon name="menu-outline"></ion-icon></button>
+        <div class="topbar-search"><ion-icon name="search-outline"></ion-icon><input type="text" placeholder="Search profiles..."></div>
+        <div class="topbar-actions">
+          <button class="topbar-btn notification-btn"><ion-icon name="notifications-outline"></ion-icon><span class="notification-dot"></span></button>
+          <div class="admin-profile">
+            <div class="admin-avatar"><ion-icon name="person"></ion-icon></div>
+            <div class="admin-info"><span class="admin-name">Admin</span><span class="admin-role">Super Admin</span></div>
+          </div>
+        </div>
+      </header>
+
+      <div class="admin-content">
+        <div class="page-header">
+          <div class="page-title">
+            <h1>Dating Management</h1>
+            <p>Manage dating profiles and subscriptions</p>
+          </div>
+        </div>
+
+        <!-- STATS -->
+        <div class="stats-row">
+          <div class="stat-card">
+            <div class="stat-icon" style="background: rgba(236, 72, 153, 0.15); color: #ec4899;"><ion-icon name="heart"></ion-icon></div>
+            <div class="stat-content"><span class="stat-value">2,456</span><span class="stat-label">Total Profiles</span></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon revenue"><ion-icon name="card"></ion-icon></div>
+            <div class="stat-content"><span class="stat-value">892</span><span class="stat-label">Paid Subscribers</span></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon movies"><ion-icon name="cash"></ion-icon></div>
+            <div class="stat-content"><span class="stat-value">$2,676</span><span class="stat-label">Revenue ($3/yr)</span></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon views"><ion-icon name="chatbubbles"></ion-icon></div>
+            <div class="stat-content"><span class="stat-value">15.4K</span><span class="stat-label">Messages Sent</span></div>
+          </div>
+        </div>
+
+        <!-- TABS -->
+        <div class="admin-tabs">
+          <button class="admin-tab active">All Profiles</button>
+          <button class="admin-tab">Pending Review</button>
+          <button class="admin-tab">Reported</button>
+          <button class="admin-tab">Subscribers</button>
+        </div>
+
+        <!-- FILTERS -->
+        <div class="filters-bar">
+          <div class="filter-search"><ion-icon name="search-outline"></ion-icon><input type="text" placeholder="Search by name..."></div>
+          <select class="filter-select">
+            <option value="">All Genders</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+          </select>
+          <select class="filter-select">
+            <option value="">All Status</option>
+            <option value="active">Active</option>
+            <option value="pending">Pending</option>
+            <option value="suspended">Suspended</option>
+          </select>
+        </div>
+
+        <!-- PROFILES TABLE -->
+        <div class="table-card">
+          <div class="table-body">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Profile</th>
+                  <th>Location</th>
+                  <th>Age</th>
+                  <th>Subscribed</th>
+                  <th>Messages</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="datingTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="pagination">
+          <button class="page-btn"><ion-icon name="chevron-back"></ion-icon></button>
+          <button class="page-btn active">1</button>
+          <button class="page-btn">2</button>
+          <button class="page-btn">3</button>
+          <button class="page-btn"><ion-icon name="chevron-forward"></ion-icon></button>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="../assets/js/admin/dating.js"></script>
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</body>
+
+</html>
+

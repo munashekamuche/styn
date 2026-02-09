@@ -7,11 +7,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Blockbuster Movies - Styn</title>
 
-  <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="shortcut icon" href="./assets/images/site_logo.png" type="image/png">
   <link rel="stylesheet" href="./assets/css/style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Pacifico&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Kaushan+Script&family=Pacifico&display=swap" rel="stylesheet">
 </head>
 
 <body id="top" class="blockbuster-page">
@@ -24,7 +24,8 @@
       <div class="container">
         <!-- SITE NAME (LEFT) -->
         <a href="./index.html" class="header-logo">
-          <span class="logo-text">Styn</span>
+          <img src="./assets/images/logo.png" alt="Styn" class="logo-img">
+          <span class="logo-tagline">A Unique Experience.</span>
         </a>
         
         <!-- SEARCH BAR (CENTER) -->
@@ -73,7 +74,7 @@
     <nav class="navbar" data-navbar>
       <div class="navbar-top">
         <a href="./index.html" class="logo">
-          <span class="logo-text">Styn</span>
+          <img src="./assets/images/logo.png" alt="Styn" class="logo-img">
         </a>
         <button class="menu-close-btn" data-menu-close-btn>
           <ion-icon name="close-outline"></ion-icon>
@@ -146,9 +147,9 @@
         <div class="container">
           <div class="featured-movie">
             <div class="featured-poster">
-              <img src="./assets/images/movie-1.png" alt="Featured Movie">
+              <img src="./assets/images/movies/movie-1.png" alt="Featured Movie">
               <div class="featured-badge">FEATURED</div>
-              <button class="play-featured-btn" onclick="openPaymentModal(1, 'Sonic the Hedgehog 2', 4.99, './assets/images/movie-1.png')">
+              <button class="play-featured-btn" onclick="openPaymentModal(1, 'Sonic the Hedgehog 2', 4.99, './assets/images/movies/movie-1.png')">
                 <ion-icon name="play-circle"></ion-icon>
                 <span>Watch Now</span>
               </button>
@@ -174,7 +175,7 @@
                 <span class="genre-tag">Family</span>
               </div>
               <div class="featured-actions">
-                <button class="btn btn-primary btn-featured" onclick="openPaymentModal(1, 'Sonic the Hedgehog 2', 4.99, './assets/images/movie-1.png')">
+                <button class="btn btn-primary btn-featured" onclick="openPaymentModal(1, 'Sonic the Hedgehog 2', 4.99, './assets/images/movies/movie-1.png')">
                   <ion-icon name="play"></ion-icon>
                   <span>Rent for $4.99</span>
                 </button>
@@ -283,29 +284,111 @@
         </div>
       </div>
       <form class="payment-form" id="paymentForm">
-        <div class="form-group">
-          <label>Payment Method</label>
-          <select class="payment-method" required>
-            <option value="">Select payment method</option>
-            <option value="card">Credit/Debit Card</option>
-            <option value="paypal">PayPal</option>
-            <option value="crypto">Cryptocurrency</option>
-          </select>
+        <!-- Payment Method Selector -->
+        <label class="payment-method-label">Choose Payment Method</label>
+        <div class="payment-methods-grid">
+          <button type="button" class="payment-method-btn active" data-method="visa" onclick="selectPaymentMethod('visa', this)">
+            <div class="method-icon visa-icon">
+              <ion-icon name="card"></ion-icon>
+            </div>
+            <span>Visa / Card</span>
+          </button>
+          <button type="button" class="payment-method-btn" data-method="paypal" onclick="selectPaymentMethod('paypal', this)">
+            <div class="method-icon paypal-icon">
+              <ion-icon name="logo-paypal"></ion-icon>
+            </div>
+            <span>PayPal</span>
+          </button>
+          <button type="button" class="payment-method-btn" data-method="ecocash" onclick="selectPaymentMethod('ecocash', this)">
+            <div class="method-icon ecocash-icon">
+              <ion-icon name="phone-portrait"></ion-icon>
+            </div>
+            <span>EcoCash</span>
+          </button>
+          <button type="button" class="payment-method-btn" data-method="sa-account" onclick="selectPaymentMethod('sa-account', this)">
+            <div class="method-icon sa-icon">
+              <ion-icon name="business"></ion-icon>
+            </div>
+            <span>SA Bank</span>
+          </button>
         </div>
-        <div class="form-group">
-          <label>Card Number</label>
-          <input type="text" placeholder="1234 5678 9012 3456" maxlength="19" required>
-        </div>
-        <div class="form-row">
+
+        <!-- Visa / Card Fields -->
+        <div class="payment-fields" id="visa-fields">
           <div class="form-group">
-            <label>Expiry Date</label>
-            <input type="text" placeholder="MM/YY" maxlength="5" required>
+            <label>Card Number</label>
+            <input type="text" placeholder="1234 5678 9012 3456" maxlength="19" class="pay-input" id="cardNumber">
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Expiry Date</label>
+              <input type="text" placeholder="MM/YY" maxlength="5" class="pay-input" id="cardExpiry">
+            </div>
+            <div class="form-group">
+              <label>CVV</label>
+              <input type="text" placeholder="123" maxlength="4" class="pay-input" id="cardCvv">
+            </div>
           </div>
           <div class="form-group">
-            <label>CVV</label>
-            <input type="text" placeholder="123" maxlength="3" required>
+            <label>Cardholder Name</label>
+            <input type="text" placeholder="Name on card" class="pay-input" id="cardName">
           </div>
         </div>
+
+        <!-- PayPal Fields -->
+        <div class="payment-fields" id="paypal-fields" style="display: none;">
+          <div class="form-group">
+            <label>PayPal Email</label>
+            <input type="email" placeholder="your@email.com" class="pay-input" id="paypalEmail">
+          </div>
+          <p class="payment-info-text">
+            <ion-icon name="information-circle"></ion-icon>
+            You will be redirected to PayPal to complete payment.
+          </p>
+        </div>
+
+        <!-- EcoCash Fields -->
+        <div class="payment-fields" id="ecocash-fields" style="display: none;">
+          <div class="form-group">
+            <label>EcoCash Phone Number</label>
+            <input type="tel" placeholder="0771 234 567" class="pay-input" id="ecocashPhone">
+          </div>
+          <p class="payment-info-text">
+            <ion-icon name="information-circle"></ion-icon>
+            You will receive a prompt on your phone to confirm payment.
+          </p>
+        </div>
+
+        <!-- SA Bank Account Fields -->
+        <div class="payment-fields" id="sa-account-fields" style="display: none;">
+          <div class="form-group">
+            <label>Bank Name</label>
+            <select class="pay-input" id="saBankName">
+              <option value="">Select your bank</option>
+              <option value="fnb">FNB (First National Bank)</option>
+              <option value="standard">Standard Bank</option>
+              <option value="absa">ABSA</option>
+              <option value="nedbank">Nedbank</option>
+              <option value="capitec">Capitec Bank</option>
+              <option value="investec">Investec</option>
+              <option value="african">African Bank</option>
+              <option value="tymebank">TymeBank</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Account Number</label>
+            <input type="text" placeholder="Enter account number" class="pay-input" id="saAccountNumber">
+          </div>
+          <div class="form-group">
+            <label>Account Holder Name</label>
+            <input type="text" placeholder="Full name as on account" class="pay-input" id="saAccountHolder">
+          </div>
+          <p class="payment-info-text">
+            <ion-icon name="information-circle"></ion-icon>
+            An EFT debit will be processed from your account.
+          </p>
+        </div>
+
         <button type="submit" class="btn btn-primary btn-pay">
           <ion-icon name="lock-closed"></ion-icon>
           <span>Pay Securely</span>
@@ -319,7 +402,7 @@
       <div class="container">
         <div class="footer-brand-wrapper">
           <a href="./index.html" class="logo">
-            <span class="logo-text">Styn</span>
+            <img src="./assets/images/logo.png" alt="Styn" class="logo-img">
           </a>
         </div>
       </div>
@@ -335,9 +418,9 @@
     <ion-icon name="chevron-up"></ion-icon>
   </a>
 
-  <script src="./assets/js/script.js"></script>
-  <script src="./assets/js/auth.js"></script>
-  <script src="./assets/js/blockbuster.js"></script>
+  <script src="./assets/js/main/script.js"></script>
+  <script src="./assets/js/main/auth.js"></script>
+  <script src="./assets/js/main/blockbuster.js"></script>
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 

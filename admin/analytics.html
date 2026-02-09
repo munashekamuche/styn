@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Analytics - Styn Admin</title>
+
+  <link rel="shortcut icon" href="../assets/images/site_logo.png" type="image/png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/admin.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Kaushan+Script&family=Pacifico&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body id="top" class="admin-body">
+
+  <div class="admin-wrapper">
+    <aside class="admin-sidebar" id="adminSidebar">
+      <div class="sidebar-header">
+        <a href="../index.html" class="admin-logo"><img src="../assets/images/logo.png" alt="Styn" class="logo-img"><span class="logo-tagline">A Unique Experience.</span></a>
+        <span class="admin-badge">Admin</span>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-section">
+          <span class="nav-section-title">Main</span>
+          <ul class="nav-list">
+            <li><a href="./index.html" class="nav-link"><ion-icon name="grid-outline"></ion-icon><span>Dashboard</span></a></li>
+            <li><a href="./analytics.html" class="nav-link active"><ion-icon name="bar-chart-outline"></ion-icon><span>Analytics</span></a></li>
+          </ul>
+        </div>
+        <div class="nav-section">
+          <span class="nav-section-title">Management</span>
+          <ul class="nav-list">
+            <li><a href="./movies.html" class="nav-link"><ion-icon name="film-outline"></ion-icon><span>Movies</span></a></li>
+            <li><a href="./users.html" class="nav-link"><ion-icon name="people-outline"></ion-icon><span>Users</span></a></li>
+            <li><a href="./content.html" class="nav-link"><ion-icon name="videocam-outline"></ion-icon><span>Content</span></a></li>
+            <li><a href="./ads.html" class="nav-link"><ion-icon name="megaphone-outline"></ion-icon><span>Advertisements</span></a></li>
+            <li><a href="./live.html" class="nav-link"><ion-icon name="radio-outline"></ion-icon><span>Live Streams</span></a></li>
+            <li><a href="./dating.html" class="nav-link"><ion-icon name="heart-outline"></ion-icon><span>Dating</span></a></li>
+          </ul>
+        </div>
+        <div class="nav-section">
+          <span class="nav-section-title">System</span>
+          <ul class="nav-list">
+            <li><a href="./settings.html" class="nav-link"><ion-icon name="settings-outline"></ion-icon><span>Settings</span></a></li>
+            <li><a href="../index.html" class="nav-link"><ion-icon name="home-outline"></ion-icon><span>View Site</span></a></li>
+            <li><a href="#" class="nav-link" onclick="adminLogout()"><ion-icon name="log-out-outline"></ion-icon><span>Logout</span></a></li>
+          </ul>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="admin-main">
+      <header class="admin-topbar">
+        <button class="sidebar-toggle" id="sidebarToggle"><ion-icon name="menu-outline"></ion-icon></button>
+        <div class="topbar-search"><ion-icon name="search-outline"></ion-icon><input type="text" placeholder="Search..."></div>
+        <div class="topbar-actions">
+          <button class="topbar-btn notification-btn"><ion-icon name="notifications-outline"></ion-icon><span class="notification-dot"></span></button>
+          <div class="admin-profile">
+            <div class="admin-avatar"><ion-icon name="person"></ion-icon></div>
+            <div class="admin-info"><span class="admin-name">Admin</span><span class="admin-role">Super Admin</span></div>
+          </div>
+        </div>
+      </header>
+
+      <div class="admin-content">
+        <div class="page-header">
+          <div class="page-title">
+            <h1>Analytics</h1>
+            <p>Detailed platform insights and performance metrics</p>
+          </div>
+          <div class="page-actions">
+            <select class="filter-select" id="dateRange">
+              <option value="7d">Last 7 Days</option>
+              <option value="30d" selected>Last 30 Days</option>
+              <option value="90d">Last 90 Days</option>
+              <option value="1y">Last Year</option>
+            </select>
+            <button class="btn-admin secondary"><ion-icon name="download-outline"></ion-icon>Export Report</button>
+          </div>
+        </div>
+
+        <!-- KEY METRICS -->
+        <div class="stats-row">
+          <div class="stat-card">
+            <div class="stat-icon users"><ion-icon name="people"></ion-icon></div>
+            <div class="stat-content"><span class="stat-value">12,543</span><span class="stat-label">Total Users</span></div>
+            <div class="stat-trend up"><ion-icon name="trending-up"></ion-icon><span>+12.5%</span></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon revenue"><ion-icon name="cash"></ion-icon></div>
+            <div class="stat-content"><span class="stat-value">$45,230</span><span class="stat-label">Revenue</span></div>
+            <div class="stat-trend up"><ion-icon name="trending-up"></ion-icon><span>+8.2%</span></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon views"><ion-icon name="eye"></ion-icon></div>
+            <div class="stat-content"><span class="stat-value">3.2M</span><span class="stat-label">Page Views</span></div>
+            <div class="stat-trend up"><ion-icon name="trending-up"></ion-icon><span>+23.1%</span></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon movies"><ion-icon name="time"></ion-icon></div>
+            <div class="stat-content"><span class="stat-value">4.5m</span><span class="stat-label">Avg. Session</span></div>
+            <div class="stat-trend down"><ion-icon name="trending-down"></ion-icon><span>-2.3%</span></div>
+          </div>
+        </div>
+
+        <!-- MAIN CHARTS -->
+        <div class="charts-row">
+          <div class="chart-card large">
+            <div class="chart-header">
+              <h3>Revenue & Sales</h3>
+              <div class="chart-actions">
+                <button class="chart-btn active">Revenue</button>
+                <button class="chart-btn">Transactions</button>
+              </div>
+            </div>
+            <div class="chart-body" style="height: 350px;">
+              <canvas id="revenueAnalyticsChart"></canvas>
+            </div>
+          </div>
+          <div class="chart-card">
+            <div class="chart-header">
+              <h3>Revenue by Category</h3>
+            </div>
+            <div class="chart-body">
+              <canvas id="categoryChart"></canvas>
+            </div>
+            <div class="chart-legend" id="categoryLegend"></div>
+          </div>
+        </div>
+
+        <!-- USER ANALYTICS -->
+        <div class="charts-row" style="grid-template-columns: 1fr 1fr;">
+          <div class="chart-card">
+            <div class="chart-header">
+              <h3>User Acquisition</h3>
+            </div>
+            <div class="chart-body">
+              <canvas id="acquisitionChart"></canvas>
+            </div>
+          </div>
+          <div class="chart-card">
+            <div class="chart-header">
+              <h3>User Activity by Hour</h3>
+            </div>
+            <div class="chart-body">
+              <canvas id="activityChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- DETAILED TABLES -->
+        <div class="tables-row">
+          <div class="table-card">
+            <div class="table-header">
+              <h3>Top Performing Content</h3>
+              <a href="#" class="view-all">View All</a>
+            </div>
+            <div class="table-body">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Content</th>
+                    <th>Type</th>
+                    <th>Views</th>
+                    <th>Engagement</th>
+                  </tr>
+                </thead>
+                <tbody id="topContentTable"></tbody>
+              </table>
+            </div>
+          </div>
+          <div class="table-card">
+            <div class="table-header">
+              <h3>Geographic Distribution</h3>
+              <a href="#" class="view-all">View All</a>
+            </div>
+            <div class="table-body">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Country</th>
+                    <th>Users</th>
+                    <th>Revenue</th>
+                    <th>% of Total</th>
+                  </tr>
+                </thead>
+                <tbody id="geoTable"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- PLATFORM METRICS -->
+        <div class="bottom-row" style="grid-template-columns: 1fr 1fr;">
+          <div class="chart-card">
+            <div class="chart-header">
+              <h3>Device Distribution</h3>
+            </div>
+            <div class="chart-body" style="height: 250px;">
+              <canvas id="deviceChart"></canvas>
+            </div>
+          </div>
+          <div class="chart-card">
+            <div class="chart-header">
+              <h3>Content Type Performance</h3>
+            </div>
+            <div class="chart-body" style="height: 250px;">
+              <canvas id="contentTypeChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="../assets/js/admin/analytics.js"></script>
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</body>
+
+</html>
+

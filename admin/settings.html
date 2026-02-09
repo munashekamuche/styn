@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings - Styn Admin</title>
+
+  <link rel="shortcut icon" href="../assets/images/site_logo.png" type="image/png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/admin.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Kaushan+Script&family=Pacifico&display=swap" rel="stylesheet">
+</head>
+
+<body id="top" class="admin-body">
+
+  <div class="admin-wrapper">
+    <aside class="admin-sidebar" id="adminSidebar">
+      <div class="sidebar-header">
+        <a href="../index.html" class="admin-logo"><img src="../assets/images/logo.png" alt="Styn" class="logo-img"><span class="logo-tagline">A Unique Experience.</span></a>
+        <span class="admin-badge">Admin</span>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-section">
+          <span class="nav-section-title">Main</span>
+          <ul class="nav-list">
+            <li><a href="./index.html" class="nav-link"><ion-icon name="grid-outline"></ion-icon><span>Dashboard</span></a></li>
+            <li><a href="./analytics.html" class="nav-link"><ion-icon name="bar-chart-outline"></ion-icon><span>Analytics</span></a></li>
+          </ul>
+        </div>
+        <div class="nav-section">
+          <span class="nav-section-title">Management</span>
+          <ul class="nav-list">
+            <li><a href="./movies.html" class="nav-link"><ion-icon name="film-outline"></ion-icon><span>Movies</span></a></li>
+            <li><a href="./users.html" class="nav-link"><ion-icon name="people-outline"></ion-icon><span>Users</span></a></li>
+            <li><a href="./content.html" class="nav-link"><ion-icon name="videocam-outline"></ion-icon><span>Content</span></a></li>
+            <li><a href="./ads.html" class="nav-link"><ion-icon name="megaphone-outline"></ion-icon><span>Advertisements</span></a></li>
+            <li><a href="./live.html" class="nav-link"><ion-icon name="radio-outline"></ion-icon><span>Live Streams</span></a></li>
+            <li><a href="./dating.html" class="nav-link"><ion-icon name="heart-outline"></ion-icon><span>Dating</span></a></li>
+          </ul>
+        </div>
+        <div class="nav-section">
+          <span class="nav-section-title">System</span>
+          <ul class="nav-list">
+            <li><a href="./settings.html" class="nav-link active"><ion-icon name="settings-outline"></ion-icon><span>Settings</span></a></li>
+            <li><a href="../index.html" class="nav-link"><ion-icon name="home-outline"></ion-icon><span>View Site</span></a></li>
+            <li><a href="#" class="nav-link" onclick="adminLogout()"><ion-icon name="log-out-outline"></ion-icon><span>Logout</span></a></li>
+          </ul>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="admin-main">
+      <header class="admin-topbar">
+        <button class="sidebar-toggle" id="sidebarToggle"><ion-icon name="menu-outline"></ion-icon></button>
+        <div class="topbar-search"><ion-icon name="search-outline"></ion-icon><input type="text" placeholder="Search settings..."></div>
+        <div class="topbar-actions">
+          <div class="admin-profile">
+            <div class="admin-avatar"><ion-icon name="person"></ion-icon></div>
+            <div class="admin-info"><span class="admin-name">Admin</span><span class="admin-role">Super Admin</span></div>
+          </div>
+        </div>
+      </header>
+
+      <div class="admin-content">
+        <div class="page-header">
+          <div class="page-title">
+            <h1>Settings</h1>
+            <p>Configure your platform settings and preferences</p>
+          </div>
+        </div>
+
+        <!-- SETTINGS TABS -->
+        <div class="admin-tabs">
+          <button class="admin-tab active" data-tab="general">General</button>
+          <button class="admin-tab" data-tab="payments">Payments</button>
+          <button class="admin-tab" data-tab="security">Security</button>
+          <button class="admin-tab" data-tab="notifications">Notifications</button>
+          <button class="admin-tab" data-tab="api">API Keys</button>
+        </div>
+
+        <!-- GENERAL SETTINGS -->
+        <div class="settings-section" id="generalSettings">
+          <div class="settings-card">
+            <div class="settings-card-header">
+              <h3>Site Information</h3>
+              <p>Basic information about your platform</p>
+            </div>
+            <form class="admin-form">
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Site Name</label>
+                  <input type="text" value="Styn">
+                </div>
+                <div class="form-group">
+                  <label>Tagline</label>
+                  <input type="text" value="Watch, Create, Connect">
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Site Description</label>
+                <textarea rows="3">Styn is a modern digital media ecosystem combining streaming, social video, and live broadcasting.</textarea>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Support Email</label>
+                  <input type="email" value="support@styn.com">
+                </div>
+                <div class="form-group">
+                  <label>Contact Phone</label>
+                  <input type="tel" value="+1 234 567 8900">
+                </div>
+              </div>
+              <button type="submit" class="btn-admin primary"><ion-icon name="save-outline"></ion-icon>Save Changes</button>
+            </form>
+          </div>
+
+          <div class="settings-card">
+            <div class="settings-card-header">
+              <h3>Content Settings</h3>
+              <p>Configure content upload and display options</p>
+            </div>
+            <form class="admin-form">
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Max Reel Duration (seconds)</label>
+                  <input type="number" value="600" min="60" max="1800">
+                </div>
+                <div class="form-group">
+                  <label>Max Upload Size (MB)</label>
+                  <input type="number" value="500" min="50" max="5000">
+                </div>
+              </div>
+              <div class="settings-toggle">
+                <div class="toggle-info">
+                  <span class="toggle-label">Auto-approve content</span>
+                  <span class="toggle-desc">Content from verified users is automatically approved</span>
+                </div>
+                <label class="toggle-switch"><input type="checkbox"><span class="toggle-slider"></span></label>
+              </div>
+              <div class="settings-toggle">
+                <div class="toggle-info">
+                  <span class="toggle-label">Enable comments</span>
+                  <span class="toggle-desc">Allow users to comment on content</span>
+                </div>
+                <label class="toggle-switch"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+              </div>
+              <div class="settings-toggle">
+                <div class="toggle-info">
+                  <span class="toggle-label">Guest browsing</span>
+                  <span class="toggle-desc">Allow guests to browse content without signing in</span>
+                </div>
+                <label class="toggle-switch"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+              </div>
+              <button type="submit" class="btn-admin primary"><ion-icon name="save-outline"></ion-icon>Save Changes</button>
+            </form>
+          </div>
+        </div>
+
+        <!-- PAYMENT SETTINGS -->
+        <div class="settings-section" id="paymentSettings" style="display: none;">
+          <div class="settings-card">
+            <div class="settings-card-header">
+              <h3>Payment Gateway</h3>
+              <p>Configure your payment processing settings</p>
+            </div>
+            <form class="admin-form">
+              <div class="form-group">
+                <label>Payment Provider</label>
+                <select>
+                  <option value="stripe" selected>Stripe</option>
+                  <option value="paypal">PayPal</option>
+                  <option value="square">Square</option>
+                </select>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label>API Key</label>
+                  <input type="password" value="sk_live_xxxxx">
+                </div>
+                <div class="form-group">
+                  <label>Secret Key</label>
+                  <input type="password" value="sk_secret_xxxxx">
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Default Currency</label>
+                <select>
+                  <option value="USD" selected>USD - US Dollar</option>
+                  <option value="EUR">EUR - Euro</option>
+                  <option value="GBP">GBP - British Pound</option>
+                </select>
+              </div>
+              <button type="submit" class="btn-admin primary"><ion-icon name="save-outline"></ion-icon>Save Changes</button>
+            </form>
+          </div>
+
+          <div class="settings-card">
+            <div class="settings-card-header">
+              <h3>Pricing</h3>
+              <p>Set default pricing and fees</p>
+            </div>
+            <form class="admin-form">
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Default Movie Price ($)</label>
+                  <input type="number" step="0.01" value="4.99">
+                </div>
+                <div class="form-group">
+                  <label>Dating Chat Unlock ($)</label>
+                  <input type="number" step="0.01" value="3.00">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Platform Fee (%)</label>
+                  <input type="number" step="0.1" value="15">
+                </div>
+                <div class="form-group">
+                  <label>Creator Payout (%)</label>
+                  <input type="number" step="0.1" value="85">
+                </div>
+              </div>
+              <button type="submit" class="btn-admin primary"><ion-icon name="save-outline"></ion-icon>Save Changes</button>
+            </form>
+          </div>
+        </div>
+
+        <!-- SECURITY SETTINGS -->
+        <div class="settings-section" id="securitySettings" style="display: none;">
+          <div class="settings-card">
+            <div class="settings-card-header">
+              <h3>Authentication</h3>
+              <p>Configure user authentication settings</p>
+            </div>
+            <form class="admin-form">
+              <div class="settings-toggle">
+                <div class="toggle-info">
+                  <span class="toggle-label">Two-factor authentication</span>
+                  <span class="toggle-desc">Require 2FA for admin accounts</span>
+                </div>
+                <label class="toggle-switch"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+              </div>
+              <div class="settings-toggle">
+                <div class="toggle-info">
+                  <span class="toggle-label">Email verification</span>
+                  <span class="toggle-desc">Require email verification for new accounts</span>
+                </div>
+                <label class="toggle-switch"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+              </div>
+              <div class="settings-toggle">
+                <div class="toggle-info">
+                  <span class="toggle-label">Phone verification</span>
+                  <span class="toggle-desc">Require phone verification for new accounts</span>
+                </div>
+                <label class="toggle-switch"><input type="checkbox"><span class="toggle-slider"></span></label>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Session Timeout (hours)</label>
+                  <input type="number" value="24" min="1" max="168">
+                </div>
+                <div class="form-group">
+                  <label>Max Login Attempts</label>
+                  <input type="number" value="5" min="3" max="10">
+                </div>
+              </div>
+              <button type="submit" class="btn-admin primary"><ion-icon name="save-outline"></ion-icon>Save Changes</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="../assets/js/admin/settings.js"></script>
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</body>
+
+</html>
+
