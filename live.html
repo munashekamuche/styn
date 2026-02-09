@@ -8,10 +8,13 @@
   <title>Live & Podcast - Styn</title>
 
   <link rel="shortcut icon" href="./assets/images/site_logo.png" type="image/png">
-  <link rel="stylesheet" href="./assets/css/style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Kaushan+Script&family=Pacifico&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/css/style.css">
+
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </head>
 
 <body id="top">
@@ -22,27 +25,24 @@
     <!-- TOP HEADER BAR -->
     <div class="header-top">
       <div class="container">
-        <!-- SITE NAME (LEFT) -->
         <a href="./index.html" class="header-logo">
           <img src="./assets/images/logo.png" alt="Styn" class="logo-img">
           <span class="logo-tagline">A Unique Experience.</span>
         </a>
         
-        <!-- SEARCH BAR (CENTER) -->
         <div class="header-search-wrapper">
           <form class="header-search-form" id="headerSearchForm">
-            <input type="text" class="header-search-input" placeholder="Search for videos" id="headerSearchInput">
+            <input type="text" class="header-search-input" placeholder="Search live & podcasts" id="headerSearchInput">
             <button type="submit" class="header-search-btn">
               <ion-icon name="search"></ion-icon>
             </button>
           </form>
         </div>
 
-        <!-- HEADER ACTIONS (RIGHT) -->
         <div class="header-actions">
-          <button class="header-action-btn create-btn" id="createBtn" onclick="document.getElementById('uploadModal')?.style.display='flex';">
-            <ion-icon name="videocam-outline"></ion-icon>
-            <span>Create</span>
+          <button class="header-action-btn create-btn" id="goLiveBtnHeader" onclick="openGoLiveModal()">
+            <ion-icon name="radio-outline"></ion-icon>
+            <span>Go Live</span>
           </button>
           
           <div class="header-action-btn account-btn" id="accountBtn">
@@ -113,21 +113,160 @@
     </div>
   </header>
 
+  <!-- MAIN CONTENT -->
   <main>
     <article>
+
       <!-- LIVE HERO -->
       <section class="live-hero">
         <div class="container">
-          <div class="hero-content">
-            <p class="hero-subtitle">Live Broadcasting</p>
-            <h1 class="h1 hero-title">Go <strong>Live</strong> or Start a Podcast</h1>
-            <p class="hero-description">
-              Broadcast your events, shows, or discussions in real-time. All streams are automatically saved for later viewing.
+          <div class="live-hero-content">
+            <div class="live-hero-badge">
+              <span class="live-pulse"></span>
+              Live Broadcasting
+            </div>
+            <h1 class="live-hero-title">Go <span class="highlight">Live</span> or Start a <span class="highlight">Podcast</span></h1>
+            <p class="live-hero-subtitle">
+              Broadcast events, shows, or discussions in real-time. Connect with your audience and build your community.
             </p>
-            <button class="btn btn-primary" id="goLiveBtn" onclick="window.location.href='./live-broadcast.html'" style="display: none;">
-              <ion-icon name="radio-button-on"></ion-icon>
-              <span>Go Live</span>
+            <div class="live-hero-actions">
+              <button class="live-hero-btn primary" id="goLiveBtn" onclick="openGoLiveModal()">
+                <ion-icon name="radio-outline"></ion-icon>
+                Go Live Now
+              </button>
+              <button class="live-hero-btn secondary" onclick="openPodcastModal()">
+                <ion-icon name="mic-outline"></ion-icon>
+                Start Podcast
+              </button>
+            </div>
+            <div class="live-hero-stats">
+              <div class="hero-stat">
+                <span class="hero-stat-value" id="totalLiveCount">3</span>
+                <span class="hero-stat-label">Live Now</span>
+              </div>
+              <div class="hero-stat-divider"></div>
+              <div class="hero-stat">
+                <span class="hero-stat-value" id="totalViewerCount">4.8K</span>
+                <span class="hero-stat-label">Watching</span>
+              </div>
+              <div class="hero-stat-divider"></div>
+              <div class="hero-stat">
+                <span class="hero-stat-value" id="totalReplayCount">156</span>
+                <span class="hero-stat-label">Replays</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB NAVIGATION -->
+      <section class="live-tabs-section">
+        <div class="container">
+          <div class="live-tabs">
+            <button class="live-tab active" data-tab="live-now" onclick="switchTab('live-now', this)">
+              <ion-icon name="radio-outline"></ion-icon>
+              <span>Live Now</span>
+              <span class="tab-count" id="liveNowCount">3</span>
             </button>
+            <button class="live-tab" data-tab="replays" onclick="switchTab('replays', this)">
+              <ion-icon name="play-circle-outline"></ion-icon>
+              <span>Replays</span>
+            </button>
+            <button class="live-tab" data-tab="podcasts" onclick="switchTab('podcasts', this)">
+              <ion-icon name="mic-outline"></ion-icon>
+              <span>Podcasts</span>
+            </button>
+            <button class="live-tab" data-tab="scheduled" onclick="switchTab('scheduled', this)">
+              <ion-icon name="calendar-outline"></ion-icon>
+              <span>Upcoming</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- FEATURED LIVE STREAM -->
+      <section class="live-featured-section" id="featuredSection">
+        <div class="container">
+          <div class="featured-stream" id="featuredStream">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- LIVE NOW TAB -->
+      <section class="live-content-section" id="live-now-tab">
+        <div class="container">
+          <div class="live-section-header">
+            <h2 class="live-section-title">
+              <span class="live-pulse-sm"></span>
+              Currently Streaming
+            </h2>
+            <div class="live-section-filter">
+              <button class="live-filter-btn active" data-filter="all" onclick="filterLive('all', this)">All</button>
+              <button class="live-filter-btn" data-filter="gaming" onclick="filterLive('gaming', this)">Gaming</button>
+              <button class="live-filter-btn" data-filter="music" onclick="filterLive('music', this)">Music</button>
+              <button class="live-filter-btn" data-filter="talk" onclick="filterLive('talk', this)">Talk Shows</button>
+              <button class="live-filter-btn" data-filter="sports" onclick="filterLive('sports', this)">Sports</button>
+            </div>
+          </div>
+          <div class="live-streams-grid" id="liveStreamsGrid">
+            <!-- Populated by JS -->
+          </div>
+          <div class="no-content-message" id="noLiveMessage" style="display: none;">
+            <ion-icon name="radio-outline"></ion-icon>
+            <h3>No Live Streams Right Now</h3>
+            <p>Be the first to go live and start streaming!</p>
+            <button class="live-hero-btn primary" onclick="openGoLiveModal()">
+              <ion-icon name="radio-outline"></ion-icon>
+              Go Live
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- REPLAYS TAB -->
+      <section class="live-content-section" id="replays-tab" style="display: none;">
+        <div class="container">
+          <div class="live-section-header">
+            <h2 class="live-section-title">Past Live Streams</h2>
+            <div class="live-section-filter">
+              <button class="live-filter-btn active">Most Recent</button>
+              <button class="live-filter-btn">Most Viewed</button>
+              <button class="live-filter-btn">This Week</button>
+            </div>
+          </div>
+          <div class="live-streams-grid replay-grid" id="replayStreamsGrid">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- PODCASTS TAB -->
+      <section class="live-content-section" id="podcasts-tab" style="display: none;">
+        <div class="container">
+          <div class="live-section-header">
+            <h2 class="live-section-title">
+              <ion-icon name="mic" style="color: var(--primary-orange);"></ion-icon>
+              Podcasts & Audio Shows
+            </h2>
+          </div>
+          <div class="podcasts-grid" id="podcastsGrid">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- SCHEDULED TAB -->
+      <section class="live-content-section" id="scheduled-tab" style="display: none;">
+        <div class="container">
+          <div class="live-section-header">
+            <h2 class="live-section-title">
+              <ion-icon name="calendar" style="color: var(--primary-yellow);"></ion-icon>
+              Upcoming Live Events
+            </h2>
+          </div>
+          <div class="scheduled-grid" id="scheduledGrid">
+            <!-- Populated by JS -->
           </div>
         </div>
       </section>
@@ -142,112 +281,129 @@
         </div>
       </section>
 
-      <!-- LIVE STREAMS -->
-      <section class="live-streams">
-        <div class="container">
-          <div class="section-header">
-            <p class="section-subtitle">Live Now</p>
-            <h2 class="h2 section-title">Currently Streaming</h2>
-          </div>
-          <ul class="streams-list" id="liveStreamsList">
-            <li>
-              <div class="stream-card live-now">
-                <a href="#" class="stream-link">
-                  <figure class="card-banner">
-                    <img src="./assets/images/movies/movie-4.png" alt="Live Stream">
-                    <div class="live-indicator">
-                      <span class="live-dot"></span>
-                      <span>LIVE</span>
-                    </div>
-                    <div class="viewer-count">
-                      <ion-icon name="people"></ion-icon>
-                      <span>1.2K watching</span>
-                    </div>
-                  </figure>
-                </a>
-                <div class="card-content">
-                  <h3 class="card-title">Live Stream Title</h3>
-                  <div class="stream-author">
-                    <img src="./assets/images/default-avatar.png" alt="Streamer" class="streamer-avatar">
-                    <span>@streamer_name</span>
-                  </div>
-                </div>
-              </div>
-            </li>
-            <!-- More live streams -->
-          </ul>
-        </div>
-      </section>
-
-      <!-- LIVE REPLAYS -->
-      <section class="live-replays">
-        <div class="container">
-          <div class="section-header">
-            <p class="section-subtitle">Live Library</p>
-            <h2 class="h2 section-title">Past Live Streams</h2>
-            <p class="section-description">Catch up on previous broadcasts</p>
-          </div>
-          <ul class="streams-list" id="replayStreamsList">
-            <li>
-              <div class="stream-card">
-                <a href="#" class="stream-link">
-                  <figure class="card-banner">
-                    <img src="./assets/images/movies/movie-5.png" alt="Live Replay">
-                    <div class="play-overlay">
-                      <ion-icon name="play-circle"></ion-icon>
-                    </div>
-                    <div class="replay-badge">REPLAY</div>
-                  </figure>
-                </a>
-                <div class="card-content">
-                  <h3 class="card-title">Past Live Stream</h3>
-                  <div class="card-meta">
-                    <span class="stream-date">Streamed 2 hours ago</span>
-                    <span class="views">12K views</span>
-                  </div>
-                </div>
-              </div>
-            </li>
-            <!-- More replay streams -->
-          </ul>
-        </div>
-      </section>
-
-      <!-- PODCASTS -->
-      <section class="podcasts">
-        <div class="container">
-          <div class="section-header">
-            <p class="section-subtitle">Podcasts</p>
-            <h2 class="h2 section-title">Audio Podcasts</h2>
-          </div>
-          <ul class="podcasts-list" id="podcastsList">
-            <li>
-              <div class="podcast-card">
-                <a href="#" class="podcast-link">
-                  <figure class="card-banner">
-                    <img src="./assets/images/movies/movie-6.png" alt="Podcast">
-                    <div class="play-overlay">
-                      <ion-icon name="play-circle"></ion-icon>
-                    </div>
-                  </figure>
-                </a>
-                <div class="card-content">
-                  <h3 class="card-title">Podcast Episode Title</h3>
-                  <p class="podcast-description">Episode description...</p>
-                  <div class="card-meta">
-                    <span class="podcast-date">Published 1 day ago</span>
-                    <span class="duration">45 min</span>
-                  </div>
-                </div>
-              </div>
-            </li>
-            <!-- More podcast cards -->
-          </ul>
-        </div>
-      </section>
     </article>
   </main>
 
+  <!-- GO LIVE MODAL -->
+  <div class="live-modal" id="goLiveModal" style="display: none;">
+    <div class="live-modal-content">
+      <div class="modal-header">
+        <h2>
+          <ion-icon name="radio" style="color: #ff4444;"></ion-icon>
+          Go Live
+        </h2>
+        <button class="modal-close-btn" onclick="closeGoLiveModal()">
+          <ion-icon name="close"></ion-icon>
+        </button>
+      </div>
+      <form class="live-form" id="goLiveForm" onsubmit="startLiveStream(event)">
+        <div class="form-group">
+          <label>Stream Title</label>
+          <input type="text" id="streamTitle" placeholder="What are you streaming?" required maxlength="100">
+        </div>
+        <div class="form-group">
+          <label>Category</label>
+          <select id="streamCategory" class="live-select" required>
+            <option value="">Select category</option>
+            <option value="gaming">Gaming</option>
+            <option value="music">Music & Performance</option>
+            <option value="talk">Talk Show / Discussion</option>
+            <option value="sports">Sports & Fitness</option>
+            <option value="education">Education & Tutorial</option>
+            <option value="entertainment">Entertainment</option>
+            <option value="news">News & Events</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Description <small>(optional)</small></label>
+          <textarea id="streamDescription" rows="3" placeholder="Tell viewers what to expect..." maxlength="250"></textarea>
+        </div>
+        <div class="form-group">
+          <label>Thumbnail</label>
+          <div class="thumbnail-upload" onclick="document.getElementById('thumbInput').click()">
+            <input type="file" id="thumbInput" accept="image/*" hidden onchange="previewThumb(event)">
+            <div class="thumb-placeholder" id="thumbPlaceholder">
+              <ion-icon name="image-outline"></ion-icon>
+              <span>Upload thumbnail (optional)</span>
+            </div>
+            <img id="thumbPreview" style="display:none; width:100%; height:100%; object-fit:cover; border-radius:12px;">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Stream Type</label>
+          <div class="stream-type-options">
+            <label class="stream-type-option active">
+              <input type="radio" name="streamType" value="video" checked>
+              <div class="type-card">
+                <ion-icon name="videocam"></ion-icon>
+                <span>Video</span>
+              </div>
+            </label>
+            <label class="stream-type-option">
+              <input type="radio" name="streamType" value="audio">
+              <div class="type-card">
+                <ion-icon name="mic"></ion-icon>
+                <span>Audio Only</span>
+              </div>
+            </label>
+            <label class="stream-type-option">
+              <input type="radio" name="streamType" value="screen">
+              <div class="type-card">
+                <ion-icon name="desktop"></ion-icon>
+                <span>Screen Share</span>
+              </div>
+            </label>
+          </div>
+        </div>
+        <button type="submit" class="go-live-submit-btn">
+          <span class="live-pulse-sm"></span>
+          Start Broadcasting
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- PODCAST MODAL -->
+  <div class="live-modal" id="podcastModal" style="display: none;">
+    <div class="live-modal-content">
+      <div class="modal-header">
+        <h2>
+          <ion-icon name="mic" style="color: var(--primary-orange);"></ion-icon>
+          Start Podcast
+        </h2>
+        <button class="modal-close-btn" onclick="closePodcastModal()">
+          <ion-icon name="close"></ion-icon>
+        </button>
+      </div>
+      <form class="live-form" id="podcastForm" onsubmit="startPodcast(event)">
+        <div class="form-group">
+          <label>Podcast / Episode Title</label>
+          <input type="text" id="podcastTitle" placeholder="Episode name..." required maxlength="100">
+        </div>
+        <div class="form-group">
+          <label>Description</label>
+          <textarea id="podcastDesc" rows="3" placeholder="What's this episode about?" maxlength="300"></textarea>
+        </div>
+        <div class="form-group">
+          <label>Cover Image</label>
+          <div class="thumbnail-upload" onclick="document.getElementById('podcastCoverInput').click()">
+            <input type="file" id="podcastCoverInput" accept="image/*" hidden>
+            <div class="thumb-placeholder">
+              <ion-icon name="image-outline"></ion-icon>
+              <span>Upload cover image (optional)</span>
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="go-live-submit-btn" style="background: linear-gradient(135deg, var(--primary-orange), var(--primary-yellow));">
+          <ion-icon name="mic"></ion-icon>
+          Start Recording
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
   <footer class="footer">
     <div class="footer-top">
       <div class="container">
@@ -260,7 +416,7 @@
     </div>
     <div class="footer-bottom">
       <div class="container">
-        <p class="copyright">&copy; 2024 <a href="#">Styn</a>. All Rights Reserved</p>
+        <p class="copyright">&copy; 2026 <a href="#">Styn</a>. All Rights Reserved</p>
       </div>
     </div>
   </footer>
@@ -272,10 +428,7 @@
   <script src="./assets/js/main/script.js"></script>
   <script src="./assets/js/main/auth.js"></script>
   <script src="./assets/js/main/live.js"></script>
-  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
 </body>
 
 </html>
-
