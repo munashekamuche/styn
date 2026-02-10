@@ -45,13 +45,10 @@
             <span>Create</span>
           </button>
           
-          <div class="header-action-btn account-btn" id="accountBtn">
+          <button class="header-action-btn account-btn" id="accountBtn" type="button">
+            <ion-icon name="person-circle-outline" class="account-icon"></ion-icon>
             <span>My Account</span>
-            <ion-icon name="person-outline"></ion-icon>
-          </div>
-          
-          <button class="header-action-btn menu-btn" data-menu-open-btn>
-            <ion-icon name="ellipsis-vertical"></ion-icon>
+            <ion-icon name="chevron-down-outline" class="dropdown-arrow"></ion-icon>
           </button>
         </div>
       </div>
@@ -81,36 +78,6 @@
         </button>
       </div>
     </nav>
-
-    <!-- ACCOUNT DROPDOWN -->
-    <div class="account-dropdown" id="accountDropdown" style="display: none;">
-      <div class="dropdown-content">
-        <div class="dropdown-user-profile" id="userProfile" style="display: none;">
-          <div class="profile-initials" id="profileInitials"></div>
-          <div class="profile-info">
-            <span class="profile-username" id="profileUsername"></span>
-            <span class="profile-email" id="profileEmail"></span>
-          </div>
-        </div>
-        <div class="dropdown-divider" id="dropdownDivider" style="display: none;"></div>
-        <a href="#" class="dropdown-item" id="myProfileItem" style="display: none;">
-          <ion-icon name="person-outline"></ion-icon>
-          <span>My Profile</span>
-        </a>
-        <a href="#" class="dropdown-item" id="settingsItem" style="display: none;">
-          <ion-icon name="settings-outline"></ion-icon>
-          <span>Settings</span>
-        </a>
-        <a href="#" class="dropdown-item" id="signOutBtn" style="display: none;">
-          <ion-icon name="log-out-outline"></ion-icon>
-          <span>Sign Out</span>
-        </a>
-        <a href="./login.html" class="dropdown-item" id="signInDropdownBtn">
-          <ion-icon name="log-in-outline"></ion-icon>
-          <span>Sign In</span>
-        </a>
-      </div>
-    </div>
   </header>
 
   <div class="auth-container">
@@ -179,6 +146,37 @@
     </div>
   </div>
 
+  <!-- ACCOUNT DROPDOWN -->
+  <div class="account-dropdown" id="accountDropdown" style="display: none;">
+    <div class="dropdown-content">
+      <div class="dropdown-user-profile" id="userProfile" style="display: none;">
+        <div class="profile-initials" id="profileInitials"></div>
+        <div class="profile-info">
+          <span class="profile-username" id="profileUsername"></span>
+          <span class="profile-email" id="profileEmail"></span>
+        </div>
+      </div>
+      <div class="dropdown-divider" id="dropdownDivider" style="display: none;"></div>
+      <a href="#" class="dropdown-item" id="myProfileItem" style="display: none;">
+        <ion-icon name="person-outline"></ion-icon>
+        <span>My Profile</span>
+      </a>
+      <a href="#" class="dropdown-item" id="settingsItem" style="display: none;">
+        <ion-icon name="settings-outline"></ion-icon>
+        <span>Settings</span>
+      </a>
+      <a href="#" class="dropdown-item" id="signOutBtn" style="display: none;">
+        <ion-icon name="log-out-outline"></ion-icon>
+        <span>Sign Out</span>
+      </a>
+      <a href="./login.html" class="dropdown-item" id="signInDropdownBtn">
+        <ion-icon name="log-in-outline"></ion-icon>
+        <span>Sign In</span>
+      </a>
+    </div>
+  </div>
+
+  <script src="./assets/js/main/notify.js"></script>
   <script src="./assets/js/main/script.js"></script>
   <script src="./assets/js/main/auth.js"></script>
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>

@@ -34,7 +34,7 @@ if (uploadForm) {
     const thumbnail = document.getElementById('thumbnailFile').files[0];
     
     if (!videoFile) {
-      alert('Please select a video file');
+      stynToast('Please select a video file.', 'warning');
       return;
     }
     
@@ -42,7 +42,7 @@ if (uploadForm) {
     // In real app, validate video duration
     
     // Simulate upload
-    alert('Video uploaded successfully! (Demo mode)');
+    stynModal({ type: 'success', title: 'Upload Complete', message: 'Your video has been uploaded successfully!' });
     document.getElementById('uploadModal').style.display = 'none';
     uploadForm.reset();
     
@@ -59,7 +59,7 @@ if (videoFileInput) {
       // Validate file type and size
       const maxSize = 500 * 1024 * 1024; // 500MB
       if (file.size > maxSize) {
-        alert('File size too large. Maximum 500MB.');
+        stynToast('File size too large. Maximum 500MB.', 'error');
         e.target.value = '';
         return;
       }
@@ -107,7 +107,7 @@ document.addEventListener('click', (e) => {
     } else {
       // Fallback: copy link
       navigator.clipboard.writeText(window.location.href);
-      alert('Link copied to clipboard!');
+      stynToast('Link copied to clipboard!', 'success');
     }
   }
 });
@@ -126,8 +126,7 @@ if (commentForm) {
     // Check if user is logged in
     const user = JSON.parse(localStorage.getItem('user') || 'null');
     if (!user) {
-      alert('Please sign in to comment');
-      window.location.href = './login.html';
+      stynModal({ type: 'warning', title: 'Sign In Required', message: 'Please sign in to comment.', confirmText: 'Sign In', cancelText: 'Later', onConfirm: () => { window.location.href = './login.html'; } });
       return;
     }
     

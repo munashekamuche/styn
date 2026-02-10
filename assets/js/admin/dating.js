@@ -92,21 +92,23 @@ function loadProfiles() {
 }
 
 function viewProfile(id) {
-  alert('Viewing profile ' + id);
+  stynToast('Opening profile #' + id + '...', 'info');
 }
 window.viewProfile = viewProfile;
 
 function editProfile(id) {
-  alert('Editing profile ' + id);
+  stynToast('Editing profile #' + id + '...', 'info');
 }
 window.editProfile = editProfile;
 
-function suspendProfile(id) {
-  if (confirm('Suspend this profile?')) {
+async function suspendProfile(id) {
+  const yes = await stynConfirm('Suspend this profile?', 'Suspend Profile');
+  if (yes) {
     const profile = datingProfiles.find(p => p.id === id);
     if (profile) {
       profile.status = 'suspended';
       loadProfiles();
+      stynToast('Profile suspended.', 'success');
     }
   }
 }

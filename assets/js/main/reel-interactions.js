@@ -23,8 +23,7 @@ window.togglePlayPause = function(btn) {
 window.handleLike = function(btn) {
   const user = JSON.parse(localStorage.getItem('user') || 'null');
   if (!user) {
-    alert('Please sign in to like reels');
-    window.location.href = './login.html';
+    stynModal({ type: 'warning', title: 'Sign In Required', message: 'Please sign in to like reels.', confirmText: 'Sign In', cancelText: 'Later', onConfirm: () => { window.location.href = './login.html'; } });
     return;
   }
   
@@ -57,8 +56,7 @@ window.handleLike = function(btn) {
 window.bookmarkReel = function(btn) {
   const user = JSON.parse(localStorage.getItem('user') || 'null');
   if (!user) {
-    alert('Please sign in to bookmark reels');
-    window.location.href = './login.html';
+    stynModal({ type: 'warning', title: 'Sign In Required', message: 'Please sign in to bookmark reels.', confirmText: 'Sign In', cancelText: 'Later', onConfirm: () => { window.location.href = './login.html'; } });
     return;
   }
   
@@ -80,8 +78,7 @@ window.bookmarkReel = function(btn) {
 window.followUser = function(btn) {
   const user = JSON.parse(localStorage.getItem('user') || 'null');
   if (!user) {
-    alert('Please sign in to follow users');
-    window.location.href = './login.html';
+    stynModal({ type: 'warning', title: 'Sign In Required', message: 'Please sign in to follow users.', confirmText: 'Sign In', cancelText: 'Later', onConfirm: () => { window.location.href = './login.html'; } });
     return;
   }
   
@@ -100,8 +97,7 @@ window.followUser = function(btn) {
 window.openComments = function(reelId) {
   const user = JSON.parse(localStorage.getItem('user') || 'null');
   if (!user) {
-    alert('Please sign in to comment');
-    window.location.href = './login.html';
+    stynModal({ type: 'warning', title: 'Sign In Required', message: 'Please sign in to comment.', confirmText: 'Sign In', cancelText: 'Later', onConfirm: () => { window.location.href = './login.html'; } });
     return;
   }
   
@@ -147,7 +143,7 @@ window.shareReel = function(reelId) {
 
 function copyToClipboard() {
   navigator.clipboard.writeText(window.location.href);
-  alert('Link copied to clipboard!');
+  stynToast('Link copied to clipboard!', 'success');
 }
 
 function formatCount(count) {

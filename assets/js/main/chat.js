@@ -335,8 +335,7 @@ function sendMessage() {
   // Check if user is logged in
   const user = JSON.parse(localStorage.getItem('user') || 'null');
   if (!user) {
-    alert('Please sign in to send messages');
-    window.location.href = './login.html';
+    stynModal({ type: 'warning', title: 'Sign In Required', message: 'Please sign in to send messages.', confirmText: 'Sign In', cancelText: 'Later', onConfirm: () => { window.location.href = './login.html'; } });
     return;
   }
   

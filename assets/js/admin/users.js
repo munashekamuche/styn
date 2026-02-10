@@ -133,12 +133,14 @@ function closeUserModal() {
 }
 window.closeUserModal = closeUserModal;
 
-function banUser(id) {
-  if (confirm('Are you sure you want to ban this user?')) {
+async function banUser(id) {
+  const yes = await stynConfirm('Are you sure you want to ban this user?', 'Ban User');
+  if (yes) {
     const user = users.find(u => u.id === id);
     if (user) {
       user.status = 'banned';
       loadUsers();
+      stynToast('User has been banned.', 'success');
     }
   }
 }

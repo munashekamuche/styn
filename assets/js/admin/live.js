@@ -90,16 +90,18 @@ function formatNumber(num) {
 }
 
 function viewStream(id) {
-  alert('Opening stream viewer...');
+  stynToast('Opening stream viewer...', 'info');
 }
 window.viewStream = viewStream;
 
-function endStream(id) {
-  if (confirm('Are you sure you want to end this stream?')) {
+async function endStream(id) {
+  const yes = await stynConfirm('Are you sure you want to end this stream?', 'End Stream');
+  if (yes) {
     const index = liveStreams.findIndex(s => s.id === id);
     if (index > -1) {
       liveStreams.splice(index, 1);
       loadLiveStreams();
+      stynToast('Stream ended successfully.', 'success');
     }
   }
 }

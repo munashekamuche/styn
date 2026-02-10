@@ -564,8 +564,7 @@ window.filterLive = filterLive;
 function openGoLiveModal() {
   const user = localStorage.getItem('user');
   if (!user) {
-    alert('Please sign in to go live.');
-    window.location.href = './login.html';
+    stynModal({ type: 'warning', title: 'Sign In Required', message: 'Please sign in to go live.', confirmText: 'Sign In', cancelText: 'Later', onConfirm: () => { window.location.href = './login.html'; } });
     return;
   }
   document.getElementById('goLiveModal').style.display = 'flex';
@@ -578,8 +577,7 @@ function closeGoLiveModal() {
 function openPodcastModal() {
   const user = localStorage.getItem('user');
   if (!user) {
-    alert('Please sign in to start a podcast.');
-    window.location.href = './login.html';
+    stynModal({ type: 'warning', title: 'Sign In Required', message: 'Please sign in to start a podcast.', confirmText: 'Sign In', cancelText: 'Later', onConfirm: () => { window.location.href = './login.html'; } });
     return;
   }
   document.getElementById('podcastModal').style.display = 'flex';
@@ -605,27 +603,27 @@ function startLiveStream(e) {
   const category = document.getElementById('streamCategory').value;
   const type = document.querySelector('input[name="streamType"]:checked').value;
   
-  alert(`🔴 Going LIVE!\n\nTitle: ${title}\nCategory: ${category}\nType: ${type}\n\n(This would start a real broadcast in production)`);
+  stynModal({ type: 'success', title: 'You\'re LIVE! 🔴', message: `Broadcasting "${title}" in ${category} (${type}). Your audience can now watch you!` });
   closeGoLiveModal();
 }
 
 function startPodcast(e) {
   e.preventDefault();
   const title = document.getElementById('podcastTitle').value;
-  alert(`🎙️ Podcast Started!\n\nTitle: ${title}\n\n(This would start recording in production)`);
+  stynModal({ type: 'success', title: 'Podcast Started! 🎙️', message: `Recording "${title}". You're now live on air!` });
   closePodcastModal();
 }
 
 function watchStream(id) {
-  alert(`▶️ Opening live stream #${id}...\n(This would open the stream player in production)`);
+  stynToast('Opening live stream... 🔴', 'info');
 }
 
 function watchReplay(id) {
-  alert(`▶️ Playing replay #${id}...\n(This would open the replay player in production)`);
+  stynToast('Loading replay... ▶️', 'info');
 }
 
 function playPodcast(id) {
-  alert(`🎧 Playing podcast #${id}...\n(This would open the audio player in production)`);
+  stynToast('Playing podcast... 🎧', 'info');
 }
 
 function toggleNotify(btn, id) {

@@ -149,12 +149,14 @@ function approveContent() {
 }
 window.approveContent = approveContent;
 
-function removeItem(id) {
-  if (confirm('Remove this content?')) {
+async function removeItem(id) {
+  const yes = await stynConfirm('Remove this content?', 'Remove Content');
+  if (yes) {
     const item = content.find(c => c.id === id);
     if (item) {
       item.status = 'removed';
       loadContent();
+      stynToast('Content removed.', 'success');
     }
   }
 }

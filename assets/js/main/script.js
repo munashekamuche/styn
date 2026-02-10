@@ -113,17 +113,58 @@ document.addEventListener('DOMContentLoaded', setActiveCategory);
 const accountBtn = document.getElementById("accountBtn");
 const accountDropdown = document.getElementById("accountDropdown");
 
+function positionDropdown() {
+  if (!accountBtn || !accountDropdown) return;
+  const rect = accountBtn.getBoundingClientRect();
+  const isMobile = window.innerWidth <= 480;
+  
+  if (isMobile) {
+    // Bottom sheet on mobile
+    accountDropdown.style.top = "auto";
+    accountDropdown.style.right = "0";
+    accountDropdown.style.left = "0";
+    accountDropdown.style.bottom = "0";
+  } else {
+    accountDropdown.style.top = (rect.bottom + 8) + "px";
+    accountDropdown.style.right = (window.innerWidth - rect.right) + "px";
+    accountDropdown.style.left = "auto";
+    accountDropdown.style.bottom = "auto";
+  }
+}
+
+function openDropdown() {
+  positionDropdown();
+  accountDropdown.style.display = "block";
+  accountBtn.classList.add("active");
+}
+
+function closeDropdown() {
+  accountDropdown.style.display = "none";
+  accountBtn.classList.remove("active");
+}
+
 if (accountBtn && accountDropdown) {
   accountBtn.addEventListener("click", (e) => {
     e.stopPropagation();
-    accountDropdown.style.display = accountDropdown.style.display === "none" ? "block" : "none";
+    const isHidden = accountDropdown.style.display === "none" || accountDropdown.style.display === "";
+    isHidden ? openDropdown() : closeDropdown();
   });
 
   // Close dropdown when clicking outside
   document.addEventListener("click", (e) => {
     if (!accountBtn.contains(e.target) && !accountDropdown.contains(e.target)) {
-      accountDropdown.style.display = "none";
+      closeDropdown();
     }
+  });
+
+  // Close on Escape key
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeDropdown();
+  });
+
+  // Reposition on resize
+  window.addEventListener("resize", () => {
+    if (accountDropdown.style.display === "block") positionDropdown();
   });
 }
 

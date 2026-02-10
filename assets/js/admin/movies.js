@@ -237,7 +237,12 @@ window.editMovie = editMovie;
 function viewMovie(id) {
   const movie = movies.find(m => m.id === id);
   if (movie) {
-    alert(`Viewing: ${movie.title}\n\nYear: ${movie.year}\nGenre: ${movie.genre}\nPrice: $${movie.price}\nViews: ${movie.views}\nRevenue: $${movie.revenue}`);
+    stynModal({
+      type: 'info',
+      title: movie.title,
+      html: true,
+      message: `<div style="text-align:left;"><p><strong>Year:</strong> ${movie.year}</p><p><strong>Genre:</strong> ${movie.genre}</p><p><strong>Price:</strong> $${movie.price}</p><p><strong>Views:</strong> ${movie.views.toLocaleString()}</p><p><strong>Revenue:</strong> $${movie.revenue.toLocaleString()}</p></div>`
+    });
   }
 }
 window.viewMovie = viewMovie;
@@ -323,7 +328,7 @@ function filterMovies() {
 
 // Export Movies
 function exportMovies() {
-  alert('Exporting movies to CSV...');
+  stynToast('Exporting movies to CSV...', 'success');
   // In production, generate and download CSV
 }
 window.exportMovies = exportMovies;

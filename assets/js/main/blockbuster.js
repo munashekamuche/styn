@@ -67,8 +67,9 @@ function renderAllMovies(limit = 12) {
   attachMovieListeners();
 }
 
-// Create movie card HTML
+// Create movie card HTML — minimal text, basic info visible
 function createMovieCard(movie) {
+  const genreLabel = movie.genre.charAt(0).toUpperCase() + movie.genre.slice(1);
   return `
     <li>
       <div class="movie-card blockbuster-card" data-movie-id="${movie.id}" data-genre="${movie.genre}">
@@ -86,27 +87,62 @@ function createMovieCard(movie) {
         </a>
         <div class="card-content">
           <h3 class="card-title">${movie.title}</h3>
-          <p class="card-description">${movie.description.substring(0, 80)}...</p>
           <div class="card-meta">
-            <div class="badge badge-outline">${movie.quality}</div>
-            <div class="duration">
-              <ion-icon name="time-outline"></ion-icon>
-              <time datetime="PT${movie.duration}M">${movie.duration} min</time>
-            </div>
-            <div class="rating">
-              <ion-icon name="star"></ion-icon>
-              <data>${movie.rating}</data>
-            </div>
+            <span class="meta-pill rating-pill"><ion-icon name="star"></ion-icon> ${movie.rating}</span>
+            <span class="meta-pill"><ion-icon name="time-outline"></ion-icon> ${movie.duration} min</span>
+            <span class="meta-pill">${movie.quality}</span>
+            <span class="meta-pill genre-pill">${genreLabel}</span>
           </div>
-          <button class="btn btn-primary btn-watch" data-movie-id="${movie.id}">
-            <ion-icon name="play"></ion-icon>
-            <span>Watch - $${movie.price.toFixed(2)}</span>
-          </button>
+          <div class="card-description-expandable" id="desc-${movie.id}" style="display: none;">
+            <p class="card-description">${movie.description}</p>
+          </div>
+          <div class="card-actions">
+            <button class="btn-view-more" onclick="toggleDescription(${movie.id}, this); event.stopPropagation();">
+              View More
+            </button>
+            <button class="btn btn-primary btn-watch" data-movie-id="${movie.id}">
+              <ion-icon name="play"></ion-icon>
+              <span>$${movie.price.toFixed(2)}</span>
+            </button>
+          </div>
         </div>
       </div>
     </li>
   `;
 }
+
+// Toggle movie description
+function toggleDescription(movieId, btn) {
+  const descEl = document.getElementById('desc-' + movieId);
+  if (!descEl) return;
+  
+  if (descEl.style.display === 'none') {
+    descEl.style.display = 'block';
+    btn.textContent = 'Show Less';
+    btn.classList.add('expanded');
+  } else {
+    descEl.style.display = 'none';
+    btn.textContent = 'View More';
+    btn.classList.remove('expanded');
+  }
+}
+window.toggleDescription = toggleDescription;
+
+// Toggle featured movie description
+function toggleFeaturedDesc(btn) {
+  const desc = document.getElementById('featuredDesc');
+  if (!desc) return;
+  if (desc.style.display === 'none') {
+    desc.style.display = 'block';
+    btn.textContent = 'Show Less';
+    btn.classList.add('expanded');
+  } else {
+    desc.style.display = 'none';
+    btn.textContent = 'View More';
+    btn.classList.remove('expanded');
+  }
+}
+window.toggleFeaturedDesc = toggleFeaturedDesc;
 
 // Attach event listeners to movie cards
 function attachMovieListeners() {
@@ -122,8 +158,7 @@ function attachMovieListeners() {
       // Check if user is logged in
       const user = JSON.parse(localStorage.getItem('user') || 'null');
       if (!user) {
-        alert('Please sign in to purchase movies');
-        window.location.href = './login.html';
+        stynModal({ type: 'warning', title: 'Sign In Required', message: 'Please sign in to purchase movies.', confirmText: 'Sign In', cancelText: 'Later', onConfirm: () => { window.location.href = './login.html'; } });
         return;
       }
       
@@ -184,10 +219,13 @@ function setupSearch() {
     }
     
     allCards.forEach(card => {
+      const movieId = parseInt(card.dataset.movieId);
+      const movie = movies.find(m => m.id === movieId);
       const title = card.querySelector('.card-title').textContent.toLowerCase();
-      const description = card.querySelector('.card-description').textContent.toLowerCase();
+      const genre = card.dataset.genre || '';
+      const desc = movie ? movie.description.toLowerCase() : '';
       
-      if (title.includes(query) || description.includes(query)) {
+      if (title.includes(query) || genre.includes(query) || desc.includes(query)) {
         card.style.display = 'block';
       } else {
         card.style.display = 'none';
@@ -308,7 +346,7 @@ if (paymentForm) {
         'sa-account': 'SA Bank Account'
       };
       
-      alert(`✅ Payment successful via ${methodLabels[currentPaymentMethod]}! You now have access to this movie.`);
+      stynModal({ type: 'success', title: 'Payment Successful!', message: `Your payment via ${methodLabels[currentPaymentMethod]} was processed. You now have access to this movie. Enjoy!` });
       document.getElementById('paymentModal').style.display = 'none';
       
       // Grant access (store in localStorage for demo)

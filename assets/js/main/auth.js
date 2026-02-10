@@ -80,10 +80,11 @@ function updateUIForLoggedInUser(userData, isAdmin) {
   
   // Show/hide dropdown items
   if (signInDropdownBtn) signInDropdownBtn.style.display = 'none';
-  if (signOutBtn) signOutBtn.style.display = 'block';
+  if (signOutBtn) signOutBtn.style.display = 'flex';
   
   if (signOutBtn) {
-    signOutBtn.onclick = () => {
+    signOutBtn.onclick = (e) => {
+      e.preventDefault();
       localStorage.removeItem('user');
       localStorage.removeItem('isAdmin');
       window.location.href = './index.html';
@@ -122,7 +123,7 @@ function updateUIForGuest() {
   }
   
   // Show/hide dropdown items
-  if (signInDropdownBtn) signInDropdownBtn.style.display = 'block';
+  if (signInDropdownBtn) signInDropdownBtn.style.display = 'flex';
   if (signOutBtn) signOutBtn.style.display = 'none';
   
   if (authButton) {
@@ -204,7 +205,13 @@ if (loginForm) {
       }
     } else {
       // Invalid credentials - show error
-      alert('Invalid email/phone or password.\n\nDemo accounts:\n• admin@styn.com / admin123\n• munashe@styn.com / munashe123\n• user@styn.com / user123\n• demo@styn.com / demo123');
+      stynModal({
+        type: 'error',
+        title: 'Login Failed',
+        message: 'Invalid email/phone or password.',
+        html: true,
+        confirmText: 'Try Again'
+      });
     }
   });
 }
@@ -250,8 +257,14 @@ document.addEventListener('DOMContentLoaded', () => {
   if (window.location.pathname.includes('chat.html')) {
     const user = checkAuth();
     if (!user) {
-      alert('Please sign in to access chat');
-      window.location.href = './login.html';
+      stynModal({
+        type: 'warning',
+        title: 'Sign In Required',
+        message: 'Please sign in to access chat.',
+        confirmText: 'Sign In',
+        onConfirm: () => { window.location.href = './login.html'; }
+      });
+      return;
     }
   }
   
@@ -259,8 +272,14 @@ document.addEventListener('DOMContentLoaded', () => {
   if (window.location.pathname.includes('/admin/')) {
     const isAdmin = localStorage.getItem('isAdmin') === 'true';
     if (!isAdmin) {
-      alert('Access denied. Admin only.');
-      window.location.href = '../index.html';
+      stynModal({
+        type: 'error',
+        title: 'Access Denied',
+        message: 'Admin access only. You will be redirected.',
+        confirmText: 'OK',
+        onConfirm: () => { window.location.href = '../index.html'; }
+      });
+      return;
     }
   }
 });
