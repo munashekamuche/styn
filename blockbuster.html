@@ -121,21 +121,19 @@
           <div class="hero-content">
             <p class="hero-subtitle">Premium Collection</p>
             <h1 class="h1 hero-title">Blockbuster <strong>Movies</strong></h1>
-            <p class="hero-description">
-              Experience the latest blockbuster movies in premium quality. Pay-per-view, completely ad-free.
-            </p>
+            <p class="hero-description">Premium quality. Pay-per-view. Ad-free.</p>
             <div class="hero-stats">
               <div class="stat-item">
                 <span class="stat-number">247+</span>
-                <span class="stat-label">Premium Movies</span>
+                <span class="stat-label">Movies</span>
               </div>
               <div class="stat-item">
                 <span class="stat-number">4K</span>
-                <span class="stat-label">Ultra HD Quality</span>
+                <span class="stat-label">Quality</span>
               </div>
               <div class="stat-item">
-                <span class="stat-number">100%</span>
-                <span class="stat-label">Ad-Free</span>
+                <span class="stat-number">0</span>
+                <span class="stat-label">Ads</span>
               </div>
             </div>
           </div>
@@ -165,23 +163,22 @@
                 <span class="featured-quality">2K</span>
               </div>
               <h2 class="featured-title">Sonic the Hedgehog 2</h2>
-              <p class="featured-description">
-                After settling in Green Hills, Sonic is eager to prove he has what it takes to be a true hero. His test comes when Dr. Robotnik returns with a new partner, Knuckles, in search of an emerald that has the power to destroy civilizations.
-              </p>
               <div class="featured-genres">
                 <span class="genre-tag">Action</span>
                 <span class="genre-tag">Adventure</span>
                 <span class="genre-tag">Comedy</span>
                 <span class="genre-tag">Family</span>
               </div>
+              <div class="featured-description-toggle">
+                <p class="featured-description" id="featuredDesc" style="display: none;">
+                  After settling in Green Hills, Sonic is eager to prove he has what it takes to be a true hero. His test comes when Dr. Robotnik returns with a new partner, Knuckles, in search of an emerald that has the power to destroy civilizations.
+                </p>
+                <button class="btn-view-more featured-view-more" onclick="toggleFeaturedDesc(this)">View More</button>
+              </div>
               <div class="featured-actions">
                 <button class="btn btn-primary btn-featured" onclick="openPaymentModal(1, 'Sonic the Hedgehog 2', 4.99, './assets/images/movies/movie-1.png')">
                   <ion-icon name="play"></ion-icon>
-                  <span>Rent for $4.99</span>
-                </button>
-                <button class="btn btn-secondary btn-featured">
-                  <ion-icon name="information-circle"></ion-icon>
-                  <span>More Info</span>
+                  <span>Rent $4.99</span>
                 </button>
               </div>
             </div>
@@ -193,7 +190,7 @@
       <section class="movie-filters-section">
         <div class="container">
           <div class="filters-header">
-            <h2 class="section-title">Browse by Genre</h2>
+            <h2 class="section-title">Genre</h2>
             <div class="search-box">
               <ion-icon name="search-outline"></ion-icon>
               <input type="text" placeholder="Search movies..." id="movieSearch">
